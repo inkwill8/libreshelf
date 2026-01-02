@@ -6,3 +6,5 @@ main-out
 .idea/
 *.swp
 *.dSYM/
+data/*.csv
+!data/books_template.csv
