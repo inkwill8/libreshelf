@@ -1,0 +1,8 @@
+*.o
+*.out
+libreshelf
+main-out
+.vscode/
+.idea/
+*.swp
+*.dSYM/
