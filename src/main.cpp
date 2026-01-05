@@ -1,5 +1,5 @@
-#include "book.h"
-#include "types.h"
+#include "../include/book.h"
+#include "../include/types.h"
 #include <iostream>
 
 int main {

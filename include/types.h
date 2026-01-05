@@ -19,10 +19,3 @@ enum class Status {
 	DID_NOT_FINISH
 };
 
-enum class Rating {
-	1,
-	2,
-	3,
-	4,
-	5
-};
