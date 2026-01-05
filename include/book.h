@@ -9,9 +9,9 @@ private:
 	std::string _isbn;
 	Genre _genre;
 	Status _status;
-	int _rating;
+	float _rating;
 
 public:
-	Book(std::string title, std::string author, std::string isbn, Genre genre, Status status, int rating);
+	Book(std::string title, std::string author, std::string isbn, Genre genre, Status status, float rating);
 
 };
