@@ -6,8 +6,8 @@ void Menu::DisplayMainMenu() {
 
 	do {
 	DisplayMenuOptions();
-	
 	std::cin >> userChoice;
+
 	switch(userChoice) {
 		case 1:
 		  Menu::ShowAllBooks();
@@ -18,7 +18,8 @@ void Menu::DisplayMainMenu() {
 };
 
 void Menu::ShowAllBooks() {
-	std::cout << "ShowAllBooks called!";
+	std::cout << "ShowAllBooks called!" << std::endl;
+	DisplayMenuOptions();
 };
 
 void Menu::DisplayMenuOptions() {
