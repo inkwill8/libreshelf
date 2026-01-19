@@ -1,24 +1,24 @@
 #include "../include/menu.h"
 
 void Menu::DisplayMainMenu() {
-	// Initialize a variable for the menu choice and open an input
-	// stream from the console
 	
 	int userChoice;
-	std::cin >> userChoice;
-	
+
 	do {
 	DisplayMenuOptions();
+	
+	std::cin >> userChoice;
 	switch(userChoice) {
 		case 1:
 		  Menu::ShowAllBooks();
+		  std::cin >> userChoice;
 		  break;
 	}
 	} while (userChoice != 0);
 };
 
 void Menu::ShowAllBooks() {
-	std::cout << "Show All books called!";
+	std::cout << "ShowAllBooks called!";
 };
 
 void Menu::DisplayMenuOptions() {
