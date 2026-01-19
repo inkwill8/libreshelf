@@ -9,7 +9,8 @@ int main() {
 	std::cout << "### LibreShelf ###" << std::endl;
 	std::cout << "##################" << std::endl;
 
-	Menu::DisplayMainMenu();
+	Menu mainMenu;
+	mainMenu.DisplayMainMenu();
 
 	return 0;
 };
