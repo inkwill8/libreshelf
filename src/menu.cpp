@@ -10,15 +10,18 @@ void Menu::DisplayMainMenu() {
 
 	switch(userChoice) {
 		case 1:
-		  Menu::ShowAllBooks();
+		  Menu::ShowAllBooks("books.csv");
 		  std::cin >> userChoice;
 		  break;
 	}
 	} while (userChoice != 0);
 };
 
-void Menu::ShowAllBooks() {
-	std::cout << "ShowAllBooks called!" << std::endl;
+void Menu::ShowAllBooks(const std::string& filename) {
+	std::ifstream books(filename);
+	
+
+
 	DisplayMenuOptions();
 };
 
