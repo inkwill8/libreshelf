@@ -6,7 +6,7 @@ Book::Book(std::string title, std::string author, std::string isbn, Genre genre,
 { }
 
 std::ostream& operator<<(std::ostream& os, const Book& book) {
-	os << book._title << " by " << book._author << " " << "ISBN: " << book._isbn <<
+	os << book._title << " | " << book._author << " | " << "ISBN: " << book._isbn <<
 	" | " << Helper::GenreToStr(book._genre) << " | " << Helper::StatusToStr(book._status) << 
 	" | " << book._rating;
 

@@ -16,6 +16,10 @@ Genre StrToGenre(std::string genre) {
 };
 
 Status StrToStatus(std::string status) {
+	for (auto& letter : status) {
+	  letter = std::tolower(letter);
+	}
+
 	if (status == "want to read") return Status::WANT_TO_READ;
 	if (status == "currently reading") return Status::CURRENTLY_READING;
 	if (status == "finished") return Status::FINISHED;
@@ -39,10 +43,10 @@ std::string GenreToStr(Genre genre) {
 };
 
 std::string StatusToStr(Status status) {
-	if (status == Status::WANT_TO_READ) return "want to read";
-	if (status == Status::CURRENTLY_READING) return "currently reading";
-	if (status == Status::FINISHED) return "finished";
-	if (status == Status::DID_NOT_FINISH) return "did not finish";
+	if (status == Status::WANT_TO_READ) return "Want to Read";
+	if (status == Status::CURRENTLY_READING) return "Currently Reading";
+	if (status == Status::FINISHED) return "Finished";
+	if (status == Status::DID_NOT_FINISH) return "Did Not Finish";
 
 	return "Unknown";
 };

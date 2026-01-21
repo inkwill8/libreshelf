@@ -57,6 +57,7 @@ void Menu::ParseCSV(const std::string& filename) {
 };
 
 void Menu::ShowAllBooks(std::vector<Book>& books) {
+	std::cout << "\n-----------------------------------------------\n";
 	for (const auto& book : books) {
 		std::cout << book << std::endl;
 	}
