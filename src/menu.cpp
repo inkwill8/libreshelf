@@ -17,11 +17,10 @@ void Menu::DisplayMainMenu() {
 	} while (userChoice != 0);
 };
 
-void Menu::ShowAllBooks(const std::string& filename) {
+void Menu::ParseCSV(const std::string& filename) {
 	std::ifstream books(filename);
 	std::string line;	
 
-	books.open();
 	
 	// SKIP HEADER LINE
 	std::getline(books, line);
@@ -37,11 +36,13 @@ void Menu::ShowAllBooks(const std::string& filename) {
 		std::getline(bookLine, title, ',');
 		std::getline(bookLine, author, ',');
 		std::getline(bookLine, isbn, ',');
-		std::getline(bookLine, genre, ',');
-		std::getline(bookLine, status, ',');
+		std::getline(bookLine, genreStr, ',');
+		std::getline(bookLine, statusStr, ',');
 		std::getline(bookLine, ratingStr, ',');
 
-		// Convert rating from string to float
+		// Convert from string to correct types
+		Genre genre = strToGenre(genreStr);
+		Status status = strToStatus(statusStr);
 		float rating = std::stof(ratingStr);
 		
 		// Push each book object into library vector

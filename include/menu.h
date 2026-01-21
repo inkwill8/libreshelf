@@ -11,7 +11,8 @@ private:
 public:
 	void DisplayMainMenu();
 	void DisplayMenuOptions();
-	std::vector<Book> ShowAllBooks(const std::string& filename);
+	void ShowAllBooks(std::vector<Book>& books);
+	void ParseCSV(const std::string& filename);
 	void SearchBooks();
 	void EditMetadata();
 	void RemoveBook();
