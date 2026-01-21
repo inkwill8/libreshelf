@@ -1,4 +1,5 @@
 #include "../include/menu.h"
+#include "../include/helper.h"
 
 void Menu::DisplayMainMenu() {
 	
@@ -41,8 +42,8 @@ void Menu::ParseCSV(const std::string& filename) {
 		std::getline(bookLine, ratingStr, ',');
 
 		// Convert from string to correct types
-		Genre genre = strToGenre(genreStr);
-		Status status = strToStatus(statusStr);
+		Genre genre = Helper::strToGenre(genreStr);
+		Status status = Helper::strToStatus(statusStr);
 		float rating = std::stof(ratingStr);
 		
 		// Push each book object into library vector
@@ -52,6 +53,10 @@ void Menu::ParseCSV(const std::string& filename) {
 	books.close();
 
 	DisplayMenuOptions();
+};
+
+void Menu::ShowAllBooks(std::vector<Book>& books) {
+
 };
 
 void Menu::DisplayMenuOptions() {
