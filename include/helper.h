@@ -16,6 +16,9 @@ Genre strToGenre(std::string genre) {
 };
 
 Status strToStatus(std::string status) {
-
+	if (status == "want to read") return Status::WANT_TO_READ;
+	if (status == "currently reading") return Status::CURRENTLY_READING;
+	if (status == "finished") return Status::FINISHED;
+	if (status == "did not finish") return Status::DID_NOT_FINISH;
 };
 }
