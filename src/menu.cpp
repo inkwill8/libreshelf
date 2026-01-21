@@ -11,7 +11,8 @@ void Menu::DisplayMainMenu() {
 
 	switch(userChoice) {
 		case 1:
-		  Menu::ShowAllBooks("books.csv");
+		  ParseCSV("books.csv");
+		  ShowAllBooks(library);
 		  std::cin >> userChoice;
 		  break;
 	}
@@ -56,7 +57,9 @@ void Menu::ParseCSV(const std::string& filename) {
 };
 
 void Menu::ShowAllBooks(std::vector<Book>& books) {
-
+	for (const auto book : books) {
+		std::cout << book << std::endl;
+	}
 };
 
 void Menu::DisplayMenuOptions() {
