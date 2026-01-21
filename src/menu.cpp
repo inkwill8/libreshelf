@@ -12,7 +12,7 @@ void Menu::DisplayMainMenu() {
 
 	switch(userChoice) {
 		case 1:
-		  ParseCSV("books.csv");
+		  ParseCSV("../data/books.csv");
 		  ShowAllBooks(library);
 		  std::cin >> userChoice;
 		  break;
