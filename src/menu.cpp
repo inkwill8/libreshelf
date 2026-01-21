@@ -42,10 +42,10 @@ void Menu::ParseCSV(const std::string& filename) {
 		std::getline(bookLine, statusStr, ',');
 		std::getline(bookLine, ratingStr, ',');
 
-		// Convert from string to correct types
-		Genre genre = Helper::StrToGenre(genreStr);
-		Status status = Helper::StrToStatus(statusStr);
-		float rating = std::stof(ratingStr);
+		// Convert from string to correct types with validation for empty fields
+		Genre genre = genreStr.empty() ? Genre::UNKNOWN : Helper::StrToGenre(genreStr);
+		Status status = statusStr.empty() ? Status::UNKNOWN : Helper::StrToStatus(statusStr);
+		float rating = ratingStr.empty() ? 0.0f : std::stof(ratingStr);
 		
 		// Push each book object into library vector
 		Book currentBook = Book(title, author, isbn, genre, status, rating);
@@ -53,7 +53,7 @@ void Menu::ParseCSV(const std::string& filename) {
 	}
 	books.close();
 
-	DisplayMenuOptions();
+	//DisplayMenuOptions();
 };
 
 void Menu::ShowAllBooks(std::vector<Book>& books) {

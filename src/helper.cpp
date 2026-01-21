@@ -11,6 +11,8 @@ Genre StrToGenre(std::string genre) {
 	if (genre == "Romance") return Genre::ROMANCE;
 	if (genre == "Horror") return Genre::HORROR;
 	if (genre == "Thriller") return Genre::THRILLER;
+
+	return Genre::UNKNOWN;
 };
 
 Status StrToStatus(std::string status) {
@@ -18,6 +20,8 @@ Status StrToStatus(std::string status) {
 	if (status == "currently reading") return Status::CURRENTLY_READING;
 	if (status == "finished") return Status::FINISHED;
 	if (status == "did not finish") return Status::DID_NOT_FINISH;
+
+	return Status::UNKNOWN;
 };
 
 std::string GenreToStr(Genre genre) {
@@ -30,6 +34,8 @@ std::string GenreToStr(Genre genre) {
 	if (genre == Genre::ROMANCE) return "Romance";
 	if (genre == Genre::HORROR) return "Horror";
 	if (genre == Genre::THRILLER) return "Thriller";
+
+	return "Unknown";
 };
 
 std::string StatusToStr(Status status) {
@@ -37,6 +43,8 @@ std::string StatusToStr(Status status) {
 	if (status == Status::CURRENTLY_READING) return "currently reading";
 	if (status == Status::FINISHED) return "finished";
 	if (status == Status::DID_NOT_FINISH) return "did not finish";
+
+	return "Unknown";
 };
 }
 
