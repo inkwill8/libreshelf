@@ -19,8 +19,26 @@ void Menu::DisplayMainMenu() {
 
 void Menu::ShowAllBooks(const std::string& filename) {
 	std::ifstream books(filename);
-	
+	std::string line;	
 
+	books.open();
+	
+	// SKIP HEADER LINE
+	std::getline(books, line);
+
+	// While the input stream is in a good state, read data
+	while (std::getline(books, line)) {
+		std::stringstream bookLine(line); // Open a stringstream for each line
+
+		// Create member vars to hold each value temporarily
+		std::string title, author, isbn, genre, status, ratingStr;
+		
+		std::getline(bookLine, title, ',');
+		std::getline(bookLine, author, ',');
+		std::getline(bookLine, isbn, ',');
+		std::getline(bookLine, genre, ',');
+		std::getline(bookLine, status, ',');
+		std::getline(bookLine, ratingStr, ',');
 
 	DisplayMenuOptions();
 };
