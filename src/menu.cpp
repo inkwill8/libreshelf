@@ -32,13 +32,23 @@ void Menu::ShowAllBooks(const std::string& filename) {
 
 		// Create member vars to hold each value temporarily
 		std::string title, author, isbn, genre, status, ratingStr;
-		
+
+		// Parse each field from the line
 		std::getline(bookLine, title, ',');
 		std::getline(bookLine, author, ',');
 		std::getline(bookLine, isbn, ',');
 		std::getline(bookLine, genre, ',');
 		std::getline(bookLine, status, ',');
 		std::getline(bookLine, ratingStr, ',');
+
+		// Convert rating from string to float
+		float rating = std::stof(ratingStr);
+		
+		// Push each book object into library vector
+		Book currentBook = Book(title, author, isbn, genre, status, rating);
+		library.push_back(currentBook);
+	}
+	books.close();
 
 	DisplayMenuOptions();
 };
@@ -54,3 +64,5 @@ void Menu::DisplayMenuOptions() {
 	std::cout << "0. Quit LibreShelf\n";
 	std::cout << "Choice: ";
 };
+
+std::vector<Book> Menu::GetLibrary() const { return library; };
