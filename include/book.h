@@ -1,6 +1,7 @@
 #pragma once
 #include "types.h"
 #include <string>
+#include <ostream>
 
 class Book {
 private:
@@ -13,5 +14,6 @@ private:
 
 public:
 	Book(std::string title, std::string author, std::string isbn, Genre genre, Status status, float rating);
+	friend std::ostream& operator<<(std::ostream& os, const Book& book);
 
 };
