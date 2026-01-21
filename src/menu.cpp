@@ -1,5 +1,6 @@
 #include "../include/menu.h"
 #include "../include/helper.h"
+#include <sstream>
 
 void Menu::DisplayMainMenu() {
 	
@@ -31,7 +32,7 @@ void Menu::ParseCSV(const std::string& filename) {
 		std::stringstream bookLine(line); // Open a stringstream for each line
 
 		// Create member vars to hold each value temporarily
-		std::string title, author, isbn, genre, status, ratingStr;
+		std::string title, author, isbn, genreStr, statusStr, ratingStr;
 
 		// Parse each field from the line
 		std::getline(bookLine, title, ',');

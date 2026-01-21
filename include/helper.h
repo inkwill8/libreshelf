@@ -34,7 +34,7 @@ std::string GenreToStr(Genre genre) {
 	if (genre == Genre::THRILLER) return "Thriller";
 };
 
-std::string StatustoStr(Status status) {
+std::string StatusToStr(Status status) {
 	if (status == Status::WANT_TO_READ) return "want to read";
 	if (status == Status::CURRENTLY_READING) return "currently reading";
 	if (status == Status::FINISHED) return "finished";
