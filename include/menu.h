@@ -11,10 +11,11 @@ private:
 public:
 	void DisplayMainMenu();
 	void DisplayMenuOptions();
-	void ShowAllBooks(const std::string& filename);
+	std::vector<Book> ShowAllBooks(const std::string& filename);
 	void SearchBooks();
 	void EditMetadata();
 	void RemoveBook();
 	void QuitMenu();
 
+	std::vector<Book> GetLibrary() const;
 };
