@@ -63,7 +63,7 @@ void Menu::ShowAllBooks(std::vector<Book>& books) {
 	}
 
 	// Show total number of books
-	std::cout << "Books in Library: ";
+	std::cout << "\nBooks in Library: ";
 	std::cout << library.size();
 };
 
