@@ -5,6 +5,7 @@
 void Menu::DisplayMainMenu() {
 	
 	int userChoice;
+	ParseCSV("../data/books.csv"); // Parse the CSV file once before program starts
 
 	do {
 	DisplayMenuOptions();
@@ -12,7 +13,6 @@ void Menu::DisplayMainMenu() {
 
 	switch(userChoice) {
 		case 1:
-		  ParseCSV("../data/books.csv");
 		  ShowAllBooks(library);
 		  std::cin >> userChoice;
 		  break;
@@ -22,6 +22,7 @@ void Menu::DisplayMainMenu() {
 
 		case 3:
 		  std::cout << "\n\nEnter Book Title: ";
+		  std::cin.ignore();
 		  std::string searchTerm;
 		  std::getline(std::cin, searchTerm);
 		  std::vector<Book*> results = SearchBooks(searchTerm);
@@ -120,6 +121,7 @@ void Menu::OutputSearchResults(const std::vector<Book*>& results) {
 	} else {
 		std::cout << "No Results Found!" << std::endl;
 	}
+	std::cout << "\n--------------------------------\n\n" << std::endl;
 };
 
 
