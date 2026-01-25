@@ -13,7 +13,7 @@ public:
 	void DisplayMenuOptions();
 	void ShowAllBooks(std::vector<Book>& books);
 	void ParseCSV(const std::string& filename);
-	void SearchBooks();
+	std::vector<Book*> SearchBooks(const std::string& bookName);
 	void EditMetadata();
 	void RemoveBook();
 	void QuitMenu();
