@@ -14,9 +14,9 @@ public:
 	void ShowAllBooks(std::vector<Book>& books);
 	void ParseCSV(const std::string& filename);
 	std::vector<Book*> SearchBooks(const std::string& bookName);
+	void OutputSearchResults(const std::vector<Book*>& results); 
 	void EditMetadata();
 	void RemoveBook();
-	void QuitMenu();
 
 	std::vector<Book> GetLibrary() const;
 };

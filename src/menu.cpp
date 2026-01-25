@@ -16,6 +16,16 @@ void Menu::DisplayMainMenu() {
 		  ShowAllBooks(library);
 		  std::cin >> userChoice;
 		  break;
+
+		case 2:
+		  break;
+
+		case 3:
+		  std::cout << "\n\nEnter Book Title: ";
+		  std::string searchTerm;
+		  std::getline(std::cin, searchTerm);
+		  std::vector<Book*> results = SearchBooks(searchTerm);
+		  OutputSearchResults(results);
 	}
 	} while (userChoice != 0);
 };
@@ -99,6 +109,17 @@ std::vector<Book*> Menu::SearchBooks(const std::string& bookName) {
 	}
 
 	return results;
+};
+
+void Menu::OutputSearchResults(const std::vector<Book*>& results) {
+	if (!results.empty()) {
+	  std::cout << results.size() << " Results Found:" << std::endl;
+	  for (const auto& result : results) {
+		std::cout << *result << std::endl;
+	  }
+	} else {
+		std::cout << "No Results Found!" << std::endl;
+	}
 };
 
 
