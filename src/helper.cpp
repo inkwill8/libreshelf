@@ -50,5 +50,13 @@ std::string StatusToStr(Status status) {
 
 	return "Unknown";
 };
+
+std::string ToLowercase(std::string word) {
+	for (auto& letter : word) {
+	  letter = std::tolower(letter);
+	}
+
+	return word;
+};
 }
 

@@ -93,7 +93,7 @@ void Menu::DisplayMenuOptions() {
 std::vector<Book> Menu::GetLibrary() const { return library; };
 
 
-std::vector<Book*> Menu::SearchBooks(const std::string& bookName) {
+std::vector<Book*> Menu::SearchBooks(const std::string& searchTerm) {
 	// If library is empty, parse CSV and populate it
 	if (library.empty()) {
 	  ParseCSV("../data/books.csv");
@@ -104,7 +104,15 @@ std::vector<Book*> Menu::SearchBooks(const std::string& bookName) {
 
 	// Loop over library and look for search term
 	for (int i = 0; i < library.size(); i++) {
-		if (library[i].GetTitle().contains(bookName)) {
+		// Define the current book and make it lowercase
+		std::string currentBookTitle = library[i].GetTitle();
+		std::string lowerBookTitle = Helper::ToLowercase(currentBookTitle);
+
+		// Make search term lowercase for comparison
+		std::string lowerBookName = Helper::ToLowercase(searchTerm);
+
+		// If current book title contains the search term, push it to the result vector
+		if (lowerBookTitle.contains(lowerBookName)) {
 		  results.push_back(&library[i]);
 		}
 	}
