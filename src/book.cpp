@@ -12,3 +12,6 @@ std::ostream& operator<<(std::ostream& os, const Book& book) {
 
 	return os;
 };
+
+
+std::string Book::GetTitle() const { return _title; };

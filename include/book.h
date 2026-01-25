@@ -16,4 +16,7 @@ public:
 	Book(std::string title, std::string author, std::string isbn, Genre genre, Status status, float rating);
 	friend std::ostream& operator<<(std::ostream& os, const Book& book);
 
+	// Getters
+	std::string GetTitle() const;
+
 };

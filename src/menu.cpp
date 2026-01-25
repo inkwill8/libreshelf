@@ -82,7 +82,7 @@ void Menu::DisplayMenuOptions() {
 std::vector<Book> Menu::GetLibrary() const { return library; };
 
 
-std::vector<Book*> SearchBooks(const std::string& bookName) {
+std::vector<Book*> Menu::SearchBooks(const std::string& bookName) {
 	// If library is empty, parse CSV and populate it
 	if (library.empty()) {
 	  ParseCSV("../data/books.csv");
@@ -93,7 +93,7 @@ std::vector<Book*> SearchBooks(const std::string& bookName) {
 
 	// Loop over library and look for search term
 	for (int i = 0; i < library.size(); i++) {
-		if (library[i]._title.contains(bookName)) {
+		if (library[i].GetTitle().contains(bookName)) {
 		  results.push_back(&library[i]);
 		}
 	}
