@@ -66,4 +66,8 @@ std::vector<Book*> Library::SearchBooks(const std::string& searchTerm) {
 	return results;
 };
 
+void Library::AddBook(const std::string& title, const std::string& author, const std::string& isbn, Genre& genre, Status& status, float& rating) {
+	
+};
+
 std::vector<Book> Library::GetAllBooks() const { return library; };
