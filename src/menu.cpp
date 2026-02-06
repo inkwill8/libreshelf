@@ -33,15 +33,15 @@ void Menu::DisplayMainMenu() {
 };
 
 
-void Menu::ShowAllBooks(std::vector<Book>& books) {
+void Menu::ShowAllBooks(const Library& books) {
 	std::cout << "\n-----------------------------------------------\n";
-	for (const auto& book : books) {
+	for (const auto& book : books.GetAllBooks()) {
 		std::cout << book << std::endl;
 	}
 
 	// Show total number of books
 	std::cout << "\nBooks in Library: ";
-	std::cout << library.size();
+	std::cout << books.GetAllBooks().size();
 };
 
 void Menu::DisplayMenuOptions() {

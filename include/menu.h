@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include "book.h"
 #include "library.h"
@@ -12,7 +11,7 @@ private:
 public:
 	void DisplayMainMenu();
 	void DisplayMenuOptions();
-	void ShowAllBooks(std::vector<Book>& books);
+	void ShowAllBooks(const Library& books);
 	void OutputSearchResults(const std::vector<Book*>& results); 
 
 };

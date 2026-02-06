@@ -1,4 +1,5 @@
 #include "../include/library.h"
+#include "../include/helper.h"
 
 
 void Library::LoadFromCSV(const std::string& filename) {
@@ -41,7 +42,7 @@ void Library::LoadFromCSV(const std::string& filename) {
 std::vector<Book*> Library::SearchBooks(const std::string& searchTerm) {
 	// If library is empty, parse CSV and populate it
 	if (library.empty()) {
-	  ParseCSV("../data/books.csv");
+	  LoadFromCSV("../data/books.csv");
 	}
 	
 	// Create a temp vector to hold results

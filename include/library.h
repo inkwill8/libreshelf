@@ -1,5 +1,8 @@
 #pragma once
 #include "book.h"
+#include <vector>
+#include <fstream>
+#include <sstream>
 
 class Library {
 
