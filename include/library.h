@@ -12,7 +12,7 @@ private:
 public:
 	void LoadFromCSV(const std::string& filename);
 	std::vector<Book*> SearchBooks(const std::string& bookName);
-	void AddBook(const std::string& title, const std::string& author, const std::string& isbn, Genre& genre, Status& status, float& rating);
+	bool AddBook(std::string& title, std::string& author, std::string& isbn, std::string& genre, std::string& status, std::string& rating);
 	void EditMetadata();
 	void RemoveBook();
 
