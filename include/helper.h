@@ -8,5 +8,6 @@ namespace Helper {
 	std::string GenreToStr(Genre genre);
 	std::string StatusToStr(Status status);
 	std::string ToLowercase(std::string word);
+	std::string ToStandardFormat(std::string word);
 }
 
