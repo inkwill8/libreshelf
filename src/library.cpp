@@ -87,6 +87,28 @@ bool Library::AddBook(std::string& title, std::string& author, std::string& isbn
 	
 	// Rating Validation
 	float formattedRating = std::stof(rating);
+
+	// Build a book with validated user input
+	Book newBook(formattedTitle, formattedAuthor, isbn, formattedGenre, formattedStatus, formattedRating);
+
+	// Add the new book to the in-memory library vector
+	library.push_back(newBook);
+
+	// Append the new book to the CSV file
+	bool isAppended = AppendToCSV("../data/books.csv", newBook);
+
+	return isAppended;
+};
+
+bool AppendToCSV(const std::string& filename, Book book) {
+	ofstream file(filename, ios::app);
+	if (file.is_open()) {
+		file << book;
+		file.close();
+		return true;
+	} else {
+		return false;
+	}
 };
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
