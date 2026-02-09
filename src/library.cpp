@@ -95,12 +95,12 @@ bool Library::AddBook(std::string& title, std::string& author, std::string& isbn
 	library.push_back(newBook);
 
 	// Append the new book to the CSV file
-	bool isAppended = AppendToCSV("../data/books.csv", newBook);
+	bool isAppended = Library::AppendToCSV("../data/books.csv", newBook);
 
 	return isAppended;
 };
 
-bool AppendToCSV(const std::string& filename, Book book) {
+bool Library::AppendToCSV(const std::string& filename, Book book) {
 	std::ofstream file(filename, std::ios::app);
 	if (file.is_open()) {
 		file << book;

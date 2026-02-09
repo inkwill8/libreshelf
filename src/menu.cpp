@@ -59,7 +59,7 @@ void Menu::DisplayMainMenu() {
 		  std::getline(std::cin, rating);
 
 		 bool isAppended = library.AddBook(title, author, isbn, genre, status, rating); 
-		 isAppended == true ? std::cout << "Successfully added!" : std::cout << "Something went wrong :("; 
+		 isAppended == true ? std::cout << "Successfully added!\n\n" : std::cout << "Something went wrong :(\n\n"; 
 
 		  break;
 		}
