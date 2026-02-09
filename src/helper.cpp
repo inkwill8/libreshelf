@@ -63,25 +63,17 @@ std::string ToLowercase(std::string word) {
 // Makes a string where the first letter of each word is capitalized
 std::string ToStandardFormat(std::string word) {
 	std::string formattedWord = "";
-	char prevLetter;
 
 	for (int i = 0; i < word.size(); i++) {
 	  char letter = word[i];
-	  prevLetter = word[i - 1];
 
-	  // Make sure the first letter is always capitalized
-	  if (i == 0) {
-		letter = static_cast<char>(std::toupper(letter));
-		formattedWord.push_back(letter);
-	  }
-
-	  // If the letter is a space, i.e. it's a new word, capitalize the next letter
-	  if (prevletter == ' ') {
+	  // Capitalize if it's the first letter or if the previous letter was a space
+	  if (i == 0 || word[i - 1] == ' ') {
 		letter = static_cast<char>(std::toupper(letter));
 	  }
 
 	  // To ensure all letters still get added to return string
-	  if (i != 0) { formattedWord.push_back(letter); };
+	  formattedWord.push_back(letter);
 	}
 
 	return formattedWord;
