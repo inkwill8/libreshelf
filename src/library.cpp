@@ -69,7 +69,24 @@ std::vector<Book*> Library::SearchBooks(const std::string& searchTerm) {
 bool Library::AddBook(std::string& title, std::string& author, std::string& isbn, std::string& genre, std::string& status, std::string& rating) {
 	// Returns true if successfully added, false if not
 	
+	// Title Validation
+	std::string lowercaseTitle = Helper::ToLowercase(title);
+	std::string formattedTitle = Helper::ToStandardFormat(lowercaseTitle);
 
+	// Author Validation
+	std::string lowercaseAuthor = Helper::ToLowercase(author);
+	std::string formattedAuthor = Helper::ToStandardFormat(lowercaseAuthor);
+
+	// Genre Validation
+	std::string lowercaseGenre = Helper::ToLowercase(genre);
+	std::string uppercaseGenre = Helper::ToStandardFormat(lowercaseGenre);
+	Genre formattedGenre = Helper::StrToGenre(uppercaseGenre);
+
+	// Status Validation
+	Status formattedStatus = Helper::StrToStatus(status);
+	
+	// Rating Validation
+	float formattedRating = std::stof(rating);
 };
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
