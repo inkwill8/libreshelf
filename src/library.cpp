@@ -101,14 +101,14 @@ bool Library::AddBook(std::string& title, std::string& author, std::string& isbn
 };
 
 bool AppendToCSV(const std::string& filename, Book book) {
-	ofstream file(filename, ios::app);
+	std::ofstream file(filename, std::ios::app);
 	if (file.is_open()) {
 		file << book;
 		file.close();
 		return true;
-	} else {
-		return false;
 	}
+
+	return false;
 };
 
 std::vector<Book> Library::GetAllBooks() const { return library; };

@@ -21,7 +21,7 @@ void Menu::DisplayMainMenu() {
 		case 2:
 		  break;
 
-		case 3:
+		case 3: {
 		  // Clear the input buffer after the user's menu choice
 		  std::cin.ignore();
 		  std::cout << "\n\nEnter Book Title: ";
@@ -29,8 +29,10 @@ void Menu::DisplayMainMenu() {
 		  std::getline(std::cin, searchTerm);
 		  std::vector<Book*> results = library.SearchBooks(searchTerm);
 		  OutputSearchResults(results);
+		  break;
+		}
 
-		case 4:
+		case 4: {
 		  std::cin.ignore();
 
 		  // Initialize vars for book constructor
@@ -55,7 +57,12 @@ void Menu::DisplayMainMenu() {
 		  
 		  std::cout << "Rating (1 - 5): ";
 		  std::getline(std::cin, rating);
-		  
+
+		 bool isAppended = library.AddBook(title, author, isbn, genre, status, rating); 
+		 isAppended == true ? std::cout << "Successfully added!" : std::cout << "Something went wrong :("; 
+
+		  break;
+		}
 	}
 	} while (userChoice != 0);
 };
