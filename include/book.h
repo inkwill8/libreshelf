@@ -18,5 +18,10 @@ public:
 
 	// Getters
 	std::string GetTitle() const;
+  std::string GetAuthor() const;
+  std::string GetIsbn() const;
+  Genre GetGenre() const;
+  Status GetStatus() const;
+  float GetRating() const;
 
 };

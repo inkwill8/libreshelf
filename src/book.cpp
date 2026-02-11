@@ -15,3 +15,8 @@ std::ostream& operator<<(std::ostream& os, const Book& book) {
 
 
 std::string Book::GetTitle() const { return _title; };
+std::string Book::GetAuthor() const { return _author; };
+std::string Book::GetIsbn() const { return _isbn; };
+Genre Book::GetGenre() const { return _genre; };
+Status Book::GetStatus() const { return _status; };
+float Book::GetRating() const { return _rating; };
