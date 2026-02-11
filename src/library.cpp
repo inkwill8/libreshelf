@@ -103,7 +103,13 @@ bool Library::AddBook(std::string& title, std::string& author, std::string& isbn
 bool Library::AppendToCSV(const std::string& filename, Book book) {
 	std::ofstream file(filename, std::ios::app);
 	if (file.is_open()) {
-		file << book;
+    file << book.GetTitle() << ","
+         << book.GetAuthor() << ","
+         << book.GetIsbn() << ","
+         << Helper::GenreToStr(book.GetGenre()) << ","
+         << Helper::StatusToStr(book.GetStatus()) << ","
+         << book.GetRating();
+    file << "\n";
 		file.close();
 		return true;
 	}
