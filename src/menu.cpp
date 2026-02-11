@@ -15,7 +15,6 @@ void Menu::DisplayMainMenu() {
 	switch(userChoice) {
 		case 1:
 		  ShowAllBooks(library);
-		  std::cin >> userChoice;
 		  break;
 
 		case 2:
@@ -77,6 +76,7 @@ void Menu::ShowAllBooks(const Library& books) {
 	// Show total number of books
 	std::cout << "\nBooks in Library: ";
 	std::cout << books.GetAllBooks().size();
+  std::cout << "\n\n";
 };
 
 void Menu::DisplayMenuOptions() {
