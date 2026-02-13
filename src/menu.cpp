@@ -6,7 +6,7 @@
 void Menu::DisplayMainMenu() {
 	
 	int userChoice;
-	library.LoadFromCSV("../data/books.csv"); // Parse the CSV file once before program starts
+	library.LoadLibrary("../data/books.csv"); // Parse the CSV file once before program starts
 
 	do {
 	DisplayMenuOptions();
