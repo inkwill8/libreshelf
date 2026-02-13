@@ -1,5 +1,8 @@
 #include "../include/library.h"
 #include "../include/helper.h"
+#include <sstream>
+
+std::vector<Book> Library::GetAllBooks() const { return library; };
 
 void Library::LoadLibrary(const std::string &filename) {
   std::vector<Book> books = ReadFromCSV(filename);
@@ -101,6 +104,8 @@ bool Library::RemoveBook(const std::string &bookToDelete) {
         library.erase(library.begin() + i);
       }
     }
+    // Read the CSV file, looking for the desired book
+    RemoveFromCSV(filename, bookToDelete);
   }
 };
 
@@ -136,7 +141,7 @@ std::vector<Book> Library::ReadFromCSV(const std::string &filename) {
         statusStr.empty() ? Status::UNKNOWN : Helper::StrToStatus(statusStr);
     float rating = ratingStr.empty() ? 0.0f : std::stof(ratingStr);
 
-    // Instantiate and return a book object
+    // Instantiate a book object
     Book currentBook = Book(title, author, isbn, genre, status, rating);
     loadedBooks.push_back(currentBook);
   }
@@ -145,4 +150,15 @@ std::vector<Book> Library::ReadFromCSV(const std::string &filename) {
   return loadedBooks;
 };
 
-std::vector<Book> Library::GetAllBooks() const { return library; };
+Book Library::RemoveBook(const std::string &filename, const std::string &bookToDelete) {
+  std::ifstream file(filename);
+  std::string line;
+
+  while (std::getline(file, line)) {
+    std::stringstream bookLine(line);
+    
+    std::string title;
+    std::getline(bookLine, title, ',');
+  }
+};
+
