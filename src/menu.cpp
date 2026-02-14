@@ -1,12 +1,10 @@
 #include "../include/menu.h"
-#include "../include/helper.h"
 #include "../include/library.h"
-#include <sstream>
 
 void Menu::DisplayMainMenu() {
 	
 	int userChoice;
-	library.LoadLibrary("../data/books.csv"); // Parse the CSV file once before program starts
+	library.LoadLibrary(library.GetFilename()); // Parse the CSV file once before program starts
 
 	do {
 	DisplayMenuOptions();

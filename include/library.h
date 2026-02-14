@@ -24,4 +24,5 @@ public:
   void EditMetadata();
 
   std::vector<Book> GetAllBooks() const;
+  std::string GetFilename() const;
 };

@@ -4,6 +4,7 @@
 #include <sstream>
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
+std::string Library::GetFilename() const { return filename; };
 
 void Library::LoadLibrary(const std::string &filename) {
   std::vector<Book> books = ReadFromCSV(filename);
