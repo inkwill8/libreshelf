@@ -24,4 +24,6 @@ public:
   Status GetStatus() const;
   float GetRating() const;
 
+  std::string GetStrGenre() const;
+  std::string GetStrStatus() const;
 };
