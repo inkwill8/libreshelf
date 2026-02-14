@@ -1,6 +1,7 @@
 #include "../include/library.h"
 #include "../include/helper.h"
 #include <sstream>
+#include <fstream>
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
 
@@ -150,15 +151,14 @@ std::vector<Book> Library::ReadFromCSV(const std::string &filename) {
   return loadedBooks;
 };
 
-Book Library::RemoveBook(const std::string &filename, const std::string &bookToDelete) {
-  std::ifstream file(filename);
+void Library::WriteToCSV(const std::string & filename) {
+  std::ofstream file(filename);
   std::string line;
 
-  while (std::getline(file, line)) {
-    std::stringstream bookLine(line);
-    
-    std::string title;
-    std::getline(bookLine, title, ',');
+  file.open();
+
+  while (std::getline(file, line, ',')) {
+    std::stringstream bookLine(
   }
 };
 

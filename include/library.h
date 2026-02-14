@@ -12,8 +12,7 @@ private:
 
   // CSV METHODS
   std::vector<Book> ReadFromCSV(const std::string &filename);
-  Book RemoveFromCSV(const std::string &filename,
-                     const std::string &bookToDelete);
+  void WriteToCSV(const std::string &filename);
 
 public:
   void LoadLibrary(const std::string &filename);
