@@ -16,7 +16,7 @@ void Library::LoadLibrary(const std::string &filename) {
 std::vector<Book *> Library::SearchBooks(const std::string &searchTerm) {
   // If library is empty, parse CSV and populate it
   if (library.empty()) {
-    LoadLibrary("../data/books.csv");
+    LoadLibrary(filename);
   }
 
   // Create a temp vector to hold results
@@ -24,16 +24,16 @@ std::vector<Book *> Library::SearchBooks(const std::string &searchTerm) {
 
   // Loop over library and look for search term
   for (int i = 0; i < library.size(); i++) {
-    // Define the current book and make it lowercase
+    // Define the current book title and make it lowercase
     std::string currentBookTitle = library[i].GetTitle();
     std::string lowerBookTitle = Helper::ToLowercase(currentBookTitle);
 
     // Make search term lowercase for comparison
-    std::string lowerBookName = Helper::ToLowercase(searchTerm);
+    std::string lowerSearchTerm = Helper::ToLowercase(searchTerm);
 
     // If current book title contains the search term, push it to the result
     // vector
-    if (lowerBookTitle.contains(lowerBookName)) {
+    if (lowerBookTitle.contains(lowerSearchTerm)) {
       results.push_back(&library[i]);
     }
   }
@@ -105,8 +105,8 @@ bool Library::RemoveBook(const std::string &bookToDelete) {
         library.erase(library.begin() + i);
       }
     }
-    // Read the CSV file, looking for the desired book
-    RemoveFromCSV(filename, bookToDelete);
+    // Re-write the CSV with the newly edited library vector
+    WriteToCSV(filename);
   }
 };
 
