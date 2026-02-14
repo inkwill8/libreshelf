@@ -1,7 +1,7 @@
 #include "../include/library.h"
 #include "../include/helper.h"
-#include <sstream>
 #include <fstream>
+#include <sstream>
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
 
@@ -151,14 +151,17 @@ std::vector<Book> Library::ReadFromCSV(const std::string &filename) {
   return loadedBooks;
 };
 
-void Library::WriteToCSV(const std::string & filename) {
+void Library::WriteToCSV(const std::string &filename) {
   std::ofstream file(filename);
-  std::string line;
 
-  file.open();
-
-  while (std::getline(file, line, ',')) {
-    std::stringstream bookLine(
+  if (file.is_open()) {
+    // Iterate over the libary vector to get our books
+    for (int i = 0; i < library.size(); i++) {
+      Book currentBook = library[i];
+      file << currentBook.GetTitle() << ',' << currentBook.GetAuthor() << ','
+           << currentBook.GetIsbn() << ',' << currentBook.GetStrGenre() << ','
+           << currentBook.GetStrStatus() << ',' << currentBook.GetRating() << "\n";
+      file.close();
+    }
   }
 };
-
