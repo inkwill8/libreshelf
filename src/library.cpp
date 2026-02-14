@@ -95,7 +95,7 @@ bool Library::AppendToCSV(const std::string &filename, Book book) {
 bool Library::RemoveBook(const std::string &bookToDelete) {
   // Search for desired book in library vector first
   auto searchResults = SearchBooks(bookToDelete);
-  if (searchResults.size() == 0) {
+  if (searchResults.empty()) {
     return false;
   } else {
     // Erase the book from the in-memory library vector
