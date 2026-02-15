@@ -105,8 +105,10 @@ bool Library::RemoveBook(const std::string &bookToDelete) {
   } else {
     // Erase the book from the in-memory library vector
     for (int i = 0; i < library.size(); i++) {
-      Book currentBook = library[i];
-      if (currentBook.GetTitle() == lowerBookToDelete) {
+      std::string currentBookTitle = library[i].GetTitle();
+      std::string lowerBookTitle = Helper::ToLowercase(currentBookTitle);
+
+      if (lowerBookTitle == lowerBookToDelete) {
         library.erase(library.begin() + i);
       }
     }
@@ -167,8 +169,10 @@ void Library::WriteToCSV(const std::string &filename) {
       Book currentBook = library[i];
       file << currentBook.GetTitle() << ',' << currentBook.GetAuthor() << ','
            << currentBook.GetIsbn() << ',' << currentBook.GetStrGenre() << ','
-           << currentBook.GetStrStatus() << ',' << currentBook.GetRating() << "\n";
-      file.close();
+           << currentBook.GetStrStatus() << ',' << currentBook.GetRating()
+           << "\n";
     }
+
+    file.close();
   }
 };
