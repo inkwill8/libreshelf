@@ -203,32 +203,38 @@ Book Library::EditMetadata(const std::string &bookName,
   std::string lowerField = Helper::ToLowercase(field);
   std::string lowerBookName = Helper::ToLowercase(bookName);
 
+  // Call default book object as placeholder for return
+  Book editedBook;
+
   for (int i = 0; i < searchResults.size(); i++) {
     Book currentBook = *searchResults[i];
     std::string currentBookTitle = currentBook.GetTitle();
 
     if (currentBookTitle == lowerBookName) {
+      // Edited book needs to equal current book
+      editedBook = currentBook;
+
       // Set the desired field
       if (lowerField == "title") {
-        currentBook.SetTitle(field);
+        editedBook.SetTitle(field);
       }
       if (lowerField == "author") {
-        currentBook.SetAuthor(field);
+        editedBook.SetAuthor(field);
       }
       if (lowerField == "isbn") {
-        currentBook.SetIsbn(field);
+        editedBook.SetIsbn(field);
       }
       if (lowerField == "genre") {
-        currentBook.SetGenre(Helper::StrToGenre(field));
+        editedBook.SetGenre(Helper::StrToGenre(field));
       }
       if (lowerField == "status") {
-        currentBook.SetStatus(Helper::StrToStatus(field));
+        editedBook.SetStatus(Helper::StrToStatus(field));
       }
       if (lowerField == "rating") {
-        currentBook.SetRating(std::stof(field));
+        editedBook.SetRating(std::stof(field));
       }
     }
-
-    return currentBook;
   }
+
+  return editedBook;
 };
