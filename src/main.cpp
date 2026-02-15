@@ -1,16 +1,13 @@
-#include "../include/book.h"
-#include "../include/types.h"
 #include "../include/menu.h"
 #include <iostream>
 
-
 int main() {
-	std::cout << "##################" << std::endl;
-	std::cout << "### LibreShelf ###" << std::endl;
-	std::cout << "##################" << std::endl;
+  std::cout << "##################" << std::endl;
+  std::cout << "### LibreShelf ###" << std::endl;
+  std::cout << "##################" << std::endl;
 
-	Menu mainMenu;
-	mainMenu.DisplayMainMenu();
+  Menu mainMenu;
+  mainMenu.DisplayMainMenu();
 
-	return 0;
+  return 0;
 };
