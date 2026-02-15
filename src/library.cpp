@@ -187,7 +187,8 @@ void Library::WriteToCSV(const std::string &filename) {
 };
 
 Book Library::EditMetadata(const std::string &bookName,
-                           const std::string &field) {
+                           const std::string &field,
+                           const std::string &newData) {
   // Load the books into library if empty
   if (library.empty()) {
     LoadLibrary(filename);
@@ -208,7 +209,7 @@ Book Library::EditMetadata(const std::string &bookName,
 
   for (int i = 0; i < searchResults.size(); i++) {
     Book currentBook = *searchResults[i];
-    std::string currentBookTitle = currentBook.GetTitle();
+    std::string currentBookTitle = Helper::ToLowercase(currentBook.GetTitle());
 
     if (currentBookTitle == lowerBookName) {
       // Edited book needs to equal current book
@@ -216,22 +217,23 @@ Book Library::EditMetadata(const std::string &bookName,
 
       // Set the desired field
       if (lowerField == "title") {
-        editedBook.SetTitle(field);
+        editedBook.SetTitle(newData);
       }
       if (lowerField == "author") {
-        editedBook.SetAuthor(field);
+        editedBook.SetAuthor(newData);
       }
       if (lowerField == "isbn") {
-        editedBook.SetIsbn(field);
+        editedBook.SetIsbn(newData);
       }
       if (lowerField == "genre") {
-        editedBook.SetGenre(Helper::StrToGenre(field));
+        editedBook.SetGenre(
+            Helper::StrToGenre(Helper::ToStandardFormat((newData))));
       }
       if (lowerField == "status") {
-        editedBook.SetStatus(Helper::StrToStatus(field));
+        editedBook.SetStatus(Helper::StrToStatus(newData));
       }
       if (lowerField == "rating") {
-        editedBook.SetRating(std::stof(field));
+        editedBook.SetRating(std::stof(newData));
       }
     }
   }

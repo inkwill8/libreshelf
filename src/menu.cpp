@@ -79,7 +79,7 @@ void Menu::DisplayMainMenu() {
       std::getline(std::cin, bookName);
 
       std::cout << "\n == " << Helper::ToStandardFormat(bookName) << " ==\n";
-      std::cout << "What data would you to change?\n";
+      std::cout << "What data would you like to change?\n";
       std::cout << "Options:"
                    "\n\tTitle\n\tAuthor\n\tIsbn\n\tGenre\n\tStatus\n\tRating\n";
 
@@ -88,7 +88,7 @@ void Menu::DisplayMainMenu() {
       std::cout << "Enter the new data: ";
       std::getline(std::cin, newData);
 
-      Book editedBook = library.EditMetadata(bookName, newData);
+      Book editedBook = library.EditMetadata(bookName, field, newData);
       std::cout << "Edited Book: " << editedBook << "\n";
       break;
     }
