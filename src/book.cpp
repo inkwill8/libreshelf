@@ -2,6 +2,15 @@
 #include "../include/helper.h"
 #include <string>
 
+Book::Book() {
+  _title = "";
+  _author = "";
+  _isbn = "";
+  _genre = Genre::UNKNOWN;
+  _status = Status::UNKNOWN;
+  _rating = 0.0f;
+}
+
 Book::Book(std::string title, std::string author, std::string isbn, Genre genre,
            Status status, float rating)
     : _title(title), _author(author), _isbn(isbn), _genre(genre),
