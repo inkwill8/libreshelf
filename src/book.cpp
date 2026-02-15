@@ -1,5 +1,6 @@
 #include "../include/book.h"
 #include "../include/helper.h"
+#include <string>
 
 Book::Book(std::string title, std::string author, std::string isbn, Genre genre,
            Status status, float rating)
@@ -31,3 +32,29 @@ std::string Book::GetStrStatus() const {
   std::string status = Helper::StatusToStr(_status);
   return status;
 };
+
+// SETTERS
+void Book::SetTitle(std::string title) {
+  _title = title;
+};
+
+void Book::SetAuthor(std::string author) {
+  _author = author;
+};
+
+void Book::SetIsbn(std::string isbn) {
+  _isbn = isbn;
+};
+
+void Book::SetGenre(Genre genre) {
+  _genre = genre;
+};
+
+void Book::SetStatus(Status status) {
+  _status = status;
+};
+
+void Book::SetRating(float rating) {
+  _rating = rating;
+};
+
