@@ -1,5 +1,7 @@
 #include "../include/menu.h"
+#include "../include/helper.h"
 #include "../include/library.h"
+#include <string>
 
 void Menu::DisplayMainMenu() {
 
@@ -65,8 +67,31 @@ void Menu::DisplayMainMenu() {
       break;
     }
 
-    case 5:
+    case 5: {
+      std::cin.ignore();
+      std::string bookName;
+      std::string field;
+      std::string newData;
+
+      std::cout << "\n\n=== Edit a Book ===\n";
+      std::cout << "Which book would you like to edit?\n";
+      std::cout << "Enter Title: ";
+      std::getline(std::cin, bookName);
+
+      std::cout << "\n == " << Helper::ToStandardFormat(bookName) << " ==\n";
+      std::cout << "What data would you to change?\n";
+      std::cout << "Options:"
+                   "\n\tTitle\n\tAuthor\n\tIsbn\n\tGenre\n\tStatus\n\tRating\n";
+
+      std::cout << "Data: ";
+      std::getline(std::cin, field);
+      std::cout << "Enter the new data: ";
+      std::getline(std::cin, newData);
+
+      Book editedBook = library.EditMetadata(bookName, newData);
+      std::cout << "Edited Book: " << editedBook << "\n";
       break;
+    }
 
     case 6: {
       std::cin.ignore();
