@@ -74,7 +74,7 @@ bool Library::AddBook(std::string &title, std::string &author,
   library.push_back(newBook);
 
   // Append the new book to the CSV file
-  bool isAppended = Library::AppendToCSV("../data/books.csv", newBook);
+  bool isAppended = Library::AppendToCSV(filename, newBook);
 
   return isAppended;
 };
@@ -96,18 +96,23 @@ bool Library::AppendToCSV(const std::string &filename, Book book) {
 bool Library::RemoveBook(const std::string &bookToDelete) {
   // Search for desired book in library vector first
   auto searchResults = SearchBooks(bookToDelete);
+
+  // Case validate bookToDelete
+  std::string lowerBookToDelete = Helper::ToLowercase(bookToDelete);
+
   if (searchResults.empty()) {
     return false;
   } else {
     // Erase the book from the in-memory library vector
     for (int i = 0; i < library.size(); i++) {
       Book currentBook = library[i];
-      if (currentBook.GetTitle() == bookToDelete) {
+      if (currentBook.GetTitle() == lowerBookToDelete) {
         library.erase(library.begin() + i);
       }
     }
     // Re-write the CSV with the newly edited library vector
     WriteToCSV(filename);
+    return true;
   }
 };
 
@@ -153,6 +158,7 @@ std::vector<Book> Library::ReadFromCSV(const std::string &filename) {
 };
 
 void Library::WriteToCSV(const std::string &filename) {
+
   std::ofstream file(filename);
 
   if (file.is_open()) {
