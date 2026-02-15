@@ -2,6 +2,7 @@
 #include "../include/helper.h"
 #include <fstream>
 #include <sstream>
+#include <string>
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
 std::string Library::GetFilename() const { return filename; };
@@ -182,5 +183,52 @@ void Library::WriteToCSV(const std::string &filename) {
     }
 
     file.close();
+  }
+};
+
+Book Library::EditMetadata(const std::string &bookName,
+                           const std::string &field) {
+  // Load the books into library if empty
+  if (library.empty()) {
+    LoadLibrary(filename);
+  }
+
+  // Search library for the desired book
+  auto searchResults = SearchBooks(bookName);
+
+  // If no search results, exit function
+  //  if (searchResults.empty()) { return; }
+
+  // Case validation
+  std::string lowerField = Helper::ToLowercase(field);
+  std::string lowerBookName = Helper::ToLowercase(bookName);
+
+  for (int i = 0; i < searchResults.size(); i++) {
+    Book currentBook = *searchResults[i];
+    std::string currentBookTitle = currentBook.GetTitle();
+
+    if (currentBookTitle == lowerBookName) {
+      // Set the desired field
+      if (lowerField == "title") {
+        currentBook.SetTitle(field);
+      }
+      if (lowerField == "author") {
+        currentBook.SetAuthor(field);
+      }
+      if (lowerField == "isbn") {
+        currentBook.SetIsbn(field);
+      }
+      if (lowerField == "genre") {
+        currentBook.SetGenre(Helper::StrToGenre(field));
+      }
+      if (lowerField == "status") {
+        currentBook.SetStatus(Helper::StrToStatus(field));
+      }
+      if (lowerField == "rating") {
+        currentBook.SetRating(std::stof(field));
+      }
+    }
+
+    return currentBook;
   }
 };
