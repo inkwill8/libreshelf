@@ -235,8 +235,13 @@ Book Library::EditMetadata(const std::string &bookName,
       if (lowerField == "rating") {
         editedBook.SetRating(std::stof(newData));
       }
+      break;
     }
   }
+
+  // Add the new book and remove the old entry from library
+  library.push_back(editedBook);
+  RemoveBook(bookName);
 
   return editedBook;
 };
