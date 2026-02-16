@@ -4,7 +4,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <algorithm>
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
 std::string Library::GetFilename() const { return filename; };

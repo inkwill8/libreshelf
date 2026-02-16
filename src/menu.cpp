@@ -19,9 +19,51 @@ void Menu::DisplayMainMenu() {
       ShowAllBooks(library);
       break;
 
-    case 2:
-      break;
+    case 2: {
+      std::cin.ignore();
+      int userChoice;
+      std::string trait;
+      std::string filter;
 
+      std::cout << "\n\n=== Filter by Trait ===\n";
+      std::cout << "Which trait would you like to filter by?\n";
+      std::cout << "Options:";
+      std::cout << "\n\t1. Author\n\t2. Genre\n\t3. Status\n\t4. Rating";
+      std::cout << "\nEnter numeric choice: ";
+      std::cin >> userChoice;
+
+      // Determine which to run based on chosen case
+      if (userChoice == 1) {
+        trait = "author";
+        std::string author;
+
+        std::cout << "Author Name: ";
+        std::getline(std::cin, author);
+
+        std::cout << "\n\n== Books by " << Helper::ToStandardFormat(author) << " ==\n";
+        filter = Helper::ToLowercase(author);
+      }
+      if (userChoice == 2) {
+        trait = "genre";
+        std::string genre;
+
+        std::cout << "Which genre?\n";
+        std::cout << "Options: \n";
+        std::cout << "\tBiography\n\tMemoir\n\tFantasy\n\tSci-fi\n\tYoung "
+                     "Adult\n\tHistorical "
+                     "Fiction\n\tRomance\n\tHorror\n\tThriller\n\tUnknown";
+      }
+      if (userChoice == 3) {
+        trait = "status";
+      }
+      if (userChoice == 4) {
+        trait = "rating";
+      } else {
+        std::cout << "Invalid choice.";
+      }
+
+      break;
+    }
     case 3: {
       // Clear the input buffer after the user's menu choice
       std::cin.ignore();
@@ -129,7 +171,7 @@ void Menu::ShowAllBooks(const Library &books) {
 void Menu::DisplayMenuOptions() {
   std::cout << "Menu Choices:" << std::endl;
   std::cout << "1. List All Books\n";
-  std::cout << "2. List Books by Status\n";
+  std::cout << "2. Filter by Trait\n";
   std::cout << "3. Search for Book\n";
   std::cout << "4. Add Book\n";
   std::cout << "5. Edit Metadata\n";
