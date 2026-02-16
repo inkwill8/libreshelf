@@ -34,30 +34,64 @@ void Menu::DisplayMainMenu() {
 
       // Determine which to run based on chosen case
       if (userChoice == 1) {
-        trait = "author";
         std::string author;
 
-        std::cout << "Author Name: ";
+        std::cout << "\n\nAuthor Name: ";
         std::getline(std::cin, author);
 
-        std::cout << "\n\n== Books by " << Helper::ToStandardFormat(author) << " ==\n";
-        filter = Helper::ToLowercase(author);
+        std::cout << "\n\n== Books by " << Helper::ToStandardFormat(author)
+                  << " ==\n";
+        author.push_back('$'); // Add an identifier to the end of the string so
+                               // FilterByStatus knows what type of trait it is
+        trait = Helper::ToLowercase(author);
       }
       if (userChoice == 2) {
-        trait = "genre";
         std::string genre;
 
-        std::cout << "Which genre?\n";
+        std::cout << "\n\nWhich genre?\n";
         std::cout << "Options: \n";
         std::cout << "\tBiography\n\tMemoir\n\tFantasy\n\tSci-fi\n\tYoung "
                      "Adult\n\tHistorical "
                      "Fiction\n\tRomance\n\tHorror\n\tThriller\n\tUnknown";
+
+        std::cout << "\nChoice: ";
+        std::getline(std::cin, genre);
+        std::cout << "\n\n== " << Helper::ToLowercase(genre)
+                  << " books ==\n";
+
+        genre.push_back('%');
+        trait = Helper::ToStandardFormat(genre);
       }
       if (userChoice == 3) {
-        trait = "status";
+        std::string status;
+
+        std::cout << "\n\nEnter Status: ";
+        std::cout << "\nOptions: ";
+        std::cout << "\n\tWant to Read\n\tCurrently Reading\n\tFinished\n\tDid "
+                     "Not Finish\n\tUnknown";
+
+        std::cout << "\nChoice: ";
+        std::getline(std::cin, status);
+
+        std::cout << "\n\n== " << Helper::ToStandardFormat(status) << " ==\n";
+        status.push_back('^');
+        trait = Helper::ToLowercase(status);
       }
       if (userChoice == 4) {
-        trait = "rating";
+        std::string rating;
+
+        std::cout << "\n\nEnter Rating: ";
+        std::cout << "\nOptions: ";
+        std::cout << "\n\t1.0\n\t1.5\n\t2.0\n\t2.5\n\t3.0\n\t3.5\n\t4.0\n\t4."
+                     "5\n\t5.0";
+
+        std::cout << "\nChoice: ";
+        std::getline(std::cin, rating);
+
+        std::cout << "\n\n== " << rating << " Rated Books ==\n";
+        rating.push_back('&');
+        trait = rating;
+
       } else {
         std::cout << "Invalid choice.";
       }
