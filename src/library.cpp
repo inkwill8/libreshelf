@@ -1,14 +1,17 @@
 #include "../include/library.h"
 #include "../include/helper.h"
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <algorithm>
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
 std::string Library::GetFilename() const { return filename; };
 
 void Library::LoadLibrary(const std::string &filename) {
   std::vector<Book> books = ReadFromCSV(filename);
+  std::sort(books.begin(), books.end());
 
   for (auto &book : books) {
     library.push_back(book);
