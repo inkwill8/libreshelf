@@ -21,19 +21,18 @@ void Menu::DisplayMainMenu() {
 
     case 2: {
       std::cin.ignore();
-      int userChoice;
+      int numericChoice;
       std::string trait;
-      std::string filter;
 
       std::cout << "\n\n=== Filter by Trait ===\n";
       std::cout << "Which trait would you like to filter by?\n";
       std::cout << "Options:";
       std::cout << "\n\t1. Author\n\t2. Genre\n\t3. Status\n\t4. Rating";
       std::cout << "\nEnter numeric choice: ";
-      std::cin >> userChoice;
+      std::cin >> numericChoice;
 
       // Determine which to run based on chosen case
-      if (userChoice == 1) {
+      if (numericChoice == 1) {
         std::string author;
 
         std::cout << "\n\nAuthor Name: ";
@@ -45,7 +44,7 @@ void Menu::DisplayMainMenu() {
                                // FilterByStatus knows what type of trait it is
         trait = Helper::ToLowercase(author);
       }
-      if (userChoice == 2) {
+      if (numericChoice == 2) {
         std::string genre;
 
         std::cout << "\n\nWhich genre?\n";
@@ -56,13 +55,12 @@ void Menu::DisplayMainMenu() {
 
         std::cout << "\nChoice: ";
         std::getline(std::cin, genre);
-        std::cout << "\n\n== " << Helper::ToLowercase(genre)
-                  << " books ==\n";
+        std::cout << "\n\n== " << Helper::ToLowercase(genre) << " books ==\n";
 
         genre.push_back('%');
         trait = Helper::ToStandardFormat(genre);
       }
-      if (userChoice == 3) {
+      if (numericChoice == 3) {
         std::string status;
 
         std::cout << "\n\nEnter Status: ";
@@ -77,7 +75,7 @@ void Menu::DisplayMainMenu() {
         status.push_back('^');
         trait = Helper::ToLowercase(status);
       }
-      if (userChoice == 4) {
+      if (numericChoice == 4) {
         std::string rating;
 
         std::cout << "\n\nEnter Rating: ";
@@ -95,6 +93,14 @@ void Menu::DisplayMainMenu() {
       } else {
         std::cout << "Invalid choice.";
       }
+
+      // Call FilterByTrait passing user given trait
+      std::vector<Book> filteredResults = library.FilterByTrait(trait);
+      for (auto &result : filteredResults) {
+        std::cout << result << "\n";
+      }
+
+      std::cout << filteredResults.size() << " results found.\n\n";
 
       break;
     }
