@@ -8,7 +8,7 @@ class Library {
 
 private:
   std::vector<Book> library;
-  std::string filename = "../data/books.csv";
+  std::string filename = "data/books.csv";
 
   // CSV METHODS
   std::vector<Book> ReadFromCSV(const std::string &filename);

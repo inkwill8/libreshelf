@@ -79,6 +79,10 @@ bool Library::AddBook(std::string &title, std::string &author,
   // Append the new book to the CSV file
   bool isAppended = Library::AppendToCSV(filename, newBook);
 
+  // Clear library and rewrite to implement sorting with new book
+  library.clear();
+  LoadLibrary(filename);
+
   return isAppended;
 };
 
