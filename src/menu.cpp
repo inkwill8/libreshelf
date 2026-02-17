@@ -20,7 +20,6 @@ void Menu::DisplayMainMenu() {
       break;
 
     case 2: {
-      std::cin.ignore();
       int numericChoice;
       std::string trait;
 
@@ -30,9 +29,11 @@ void Menu::DisplayMainMenu() {
       std::cout << "\n\t1. Author\n\t2. Genre\n\t3. Status\n\t4. Rating";
       std::cout << "\nEnter numeric choice: ";
       std::cin >> numericChoice;
+      std::cin.ignore();
 
       // Determine which to run based on chosen case
-      if (numericChoice == 1) {
+      switch (numericChoice) {
+      case 1: {
         std::string author;
 
         std::cout << "\n\nAuthor Name: ";
@@ -43,8 +44,10 @@ void Menu::DisplayMainMenu() {
         author.push_back('$'); // Add an identifier to the end of the string so
                                // FilterByStatus knows what type of trait it is
         trait = Helper::ToLowercase(author);
+        break;
       }
-      if (numericChoice == 2) {
+
+      case 2: {
         std::string genre;
 
         std::cout << "\n\nWhich genre?\n";
@@ -59,8 +62,10 @@ void Menu::DisplayMainMenu() {
 
         genre.push_back('%');
         trait = Helper::ToStandardFormat(genre);
+        break;
       }
-      if (numericChoice == 3) {
+
+      case 3: {
         std::string status;
 
         std::cout << "\n\nEnter Status: ";
@@ -74,8 +79,10 @@ void Menu::DisplayMainMenu() {
         std::cout << "\n\n== " << Helper::ToStandardFormat(status) << " ==\n";
         status.push_back('^');
         trait = Helper::ToLowercase(status);
+        break;
       }
-      if (numericChoice == 4) {
+
+      case 4: {
         std::string rating;
 
         std::cout << "\n\nEnter Rating: ";
@@ -89,8 +96,9 @@ void Menu::DisplayMainMenu() {
         std::cout << "\n\n== " << rating << " Rated Books ==\n";
         rating.push_back('&');
         trait = rating;
-
-      } else {
+        break;
+      }
+      default:
         std::cout << "Invalid choice.";
       }
 
