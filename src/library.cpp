@@ -270,7 +270,7 @@ std::vector<Book> Library::FilterByTrait(const std::string &trait) {
       std::string currentAuthor = library[i].GetAuthor();
       std::string lowerAuthor = Helper::ToLowercase(currentAuthor);
 
-      if (lowerAuthor == compTrait) {
+      if (lowerAuthor.contains(compTrait)) {
         filteredBooks.push_back(library[i]);
       }
     }
