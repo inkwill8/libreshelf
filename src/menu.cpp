@@ -60,10 +60,10 @@ void Menu::DisplayMainMenu() {
 
         std::cout << "\nChoice: ";
         std::getline(std::cin, genre);
-        std::cout << "\n\n== " << Helper::ToLowercase(genre) << " books ==\n";
+        std::cout << "\n\n== " << Helper::ToStandardFormat(genre) << " books ==\n";
 
         genre.push_back('%');
-        trait = Helper::ToStandardFormat(genre);
+        trait = Helper::ToLowercase(genre);
         isValid = true;
         break;
       }
