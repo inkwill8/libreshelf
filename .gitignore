@@ -8,5 +8,5 @@ main-out
 *.dSYM/
 data/*.csv
 !data/books_template.csv
-*.txt
+*.clangd
 \[dap-terminal\]*
