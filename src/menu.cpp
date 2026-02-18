@@ -51,16 +51,64 @@ void Menu::DisplayMainMenu() {
 
       case 2: {
         std::string genre;
+        int choice;
 
         std::cout << "\n\nWhich genre?\n";
         std::cout << "Options: \n";
-        std::cout << "\tBiography\n\tMemoir\n\tFantasy\n\tSci-fi\n\tYoung "
-                     "Adult\n\tHistorical "
-                     "Fiction\n\tRomance\n\tHorror\n\tThriller\n\tUnknown";
+        std::cout
+            << "\t1.Biography\n\t2.Memoir\n\t3.Fantasy\n\t4.Sci-fi\n\t5.Young "
+               "Adult\n\t6.Historical "
+               "Fiction\n\t7.Romance\n\t8.Horror\n\t9.Thriller\n\t10.Unknown";
 
         std::cout << "\nChoice: ";
-        std::getline(std::cin, genre);
-        std::cout << "\n\n== " << Helper::ToStandardFormat(genre) << " books ==\n";
+        std::cin >> choice;
+
+        switch (choice) {
+        case 1:
+          genre = "Biography";
+          break;
+
+        case 2:
+          genre = "Memoir";
+          break;
+
+        case 3:
+          genre = "Fantasy";
+          break;
+
+        case 4:
+          genre = "Sci-fi";
+          break;
+
+        case 5:
+          genre = "Young Adult";
+          break;
+
+        case 6:
+          genre = "Historical Fiction";
+          break;
+
+        case 7:
+          genre = "Romance";
+          break;
+
+        case 8:
+          genre = "Horror";
+          break;
+
+        case 9:
+          genre = "Thriller";
+          break;
+
+        case 10:
+          genre = "Unknown";
+          break;
+
+        default:
+          std::cout << "Invalid genre.\n";
+          break;
+        }
+        std::cout << "\n\n== " << genre << " Books ==\n";
 
         genre.push_back('%');
         trait = Helper::ToLowercase(genre);
