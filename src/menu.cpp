@@ -108,11 +108,14 @@ void Menu::DisplayMainMenu() {
           std::cout << "Invalid genre.\n";
           break;
         }
-        std::cout << "\n\n== " << genre << " Books ==\n";
 
-        genre.push_back('%');
-        trait = Helper::ToLowercase(genre);
-        isValid = true;
+        if (choice >= 1 && choice <= 10) {
+          std::cout << "\n\n== " << genre << " Books ==\n";
+
+          genre.push_back('%');
+          trait = Helper::ToLowercase(genre);
+          isValid = true;
+        }
         break;
       }
 
