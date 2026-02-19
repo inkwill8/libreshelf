@@ -121,19 +121,49 @@ void Menu::DisplayMainMenu() {
 
       case 3: {
         std::string status;
+        int choice;
 
         std::cout << "\n\nEnter Status: ";
         std::cout << "\nOptions: ";
-        std::cout << "\n\tWant to Read\n\tCurrently Reading\n\tFinished\n\tDid "
-                     "Not Finish\n\tUnknown";
+        std::cout << "\n\t1. Want to Read\n\t2. Currently Reading\n\t3. "
+                     "Finished\n\t4. Did "
+                     "Not Finish\n\t5. Unknown";
 
         std::cout << "\nChoice: ";
-        std::getline(std::cin, status);
+        std::cin >> choice;
 
-        std::cout << "\n\n== " << Helper::ToStandardFormat(status) << " ==\n";
-        status.push_back('^');
-        trait = Helper::ToLowercase(status);
-        isValid = true;
+        switch (choice) { 
+          case 1: 
+              status = "want to read";
+              break;
+
+          case 2: 
+              status = "currently reading";
+              break;
+
+          case 3: 
+              status = "finished";
+              break;
+
+          case 4: 
+              status = "did not finish";
+              break;
+
+          case 5: 
+              status = "unknown";
+              break;
+
+          default:
+              std::cout << "Invalid status.\n";
+              break;
+            }
+
+        if (choice >= 1 && choice <= 5) {
+          std::cout << "\n\n== " << Helper::ToStandardFormat(status) << " ==\n";
+          status.push_back('^');
+          trait = Helper::ToLowercase(status);
+          isValid = true;
+        }
         break;
       }
 
@@ -276,7 +306,7 @@ void Menu::ShowAllBooks(const Library &books) {
 };
 
 void Menu::DisplayMenuOptions() {
-  std::cout << "Menu Choices:" << std::endl;
+  std::cout << "\nMenu Choices:" << std::endl;
   std::cout << "1. List All Books\n";
   std::cout << "2. Filter by Trait\n";
   std::cout << "3. Search for Book\n";
