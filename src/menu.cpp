@@ -15,11 +15,11 @@ void Menu::DisplayMainMenu() {
     std::cin >> userChoice;
 
     switch (userChoice) {
-    case 1:
+    case 1: // LIST ALL BOOKS
       ShowAllBooks(library);
       break;
 
-    case 2: {
+    case 2: { // FILTER BY TRAIT
       int numericChoice;
       std::string trait;
       bool isValid;
@@ -132,31 +132,31 @@ void Menu::DisplayMainMenu() {
         std::cout << "\nChoice: ";
         std::cin >> choice;
 
-        switch (choice) { 
-          case 1: 
-              status = "want to read";
-              break;
+        switch (choice) {
+        case 1:
+          status = "want to read";
+          break;
 
-          case 2: 
-              status = "currently reading";
-              break;
+        case 2:
+          status = "currently reading";
+          break;
 
-          case 3: 
-              status = "finished";
-              break;
+        case 3:
+          status = "finished";
+          break;
 
-          case 4: 
-              status = "did not finish";
-              break;
+        case 4:
+          status = "did not finish";
+          break;
 
-          case 5: 
-              status = "unknown";
-              break;
+        case 5:
+          status = "unknown";
+          break;
 
-          default:
-              std::cout << "Invalid status.\n";
-              break;
-            }
+        default:
+          std::cout << "Invalid status.\n";
+          break;
+        }
 
         if (choice >= 1 && choice <= 5) {
           std::cout << "\n\n== " << Helper::ToStandardFormat(status) << " ==\n";
@@ -201,7 +201,7 @@ void Menu::DisplayMainMenu() {
       }
       break;
     }
-    case 3: {
+    case 3: { // SEARCH FOR BOOK
       // Clear the input buffer after the user's menu choice
       std::cin.ignore();
       std::cout << "\n\nEnter Book Title: ";
@@ -212,7 +212,7 @@ void Menu::DisplayMainMenu() {
       break;
     }
 
-    case 4: {
+    case 4: { // ADD BOOK
       std::cin.ignore();
 
       // Initialize vars for book constructor
@@ -246,13 +246,16 @@ void Menu::DisplayMainMenu() {
       break;
     }
 
-    case 5: {
+    case 5: { // EDIT BOOK
+    }
+
+    case 6: { // EDIT METADATA
       std::cin.ignore();
       std::string bookName;
       std::string field;
       std::string newData;
 
-      std::cout << "\n\n=== Edit a Book ===\n";
+      std::cout << "\n\n=== Edit Book Metadata ===\n";
       std::cout << "Which book would you like to edit?\n";
       std::cout << "Enter Title: ";
       std::getline(std::cin, bookName);
@@ -271,8 +274,7 @@ void Menu::DisplayMainMenu() {
       std::cout << "Edited Book: " << editedBook << "\n";
       break;
     }
-
-    case 6: {
+    case 7: { // REMOVE A BOOK
       std::cin.ignore();
       std::string bookTitle;
 
@@ -311,8 +313,9 @@ void Menu::DisplayMenuOptions() {
   std::cout << "2. Filter by Trait\n";
   std::cout << "3. Search for Book\n";
   std::cout << "4. Add Book\n";
-  std::cout << "5. Edit Metadata\n";
-  std::cout << "6. Remove Book\n";
+  std::cout << "5. Edit Book\n";
+  std::cout << "6. Edit Metadata\n";
+  std::cout << "7. Remove Book\n";
   std::cout << "0. Quit LibreShelf\n";
   std::cout << "Choice: ";
 };
