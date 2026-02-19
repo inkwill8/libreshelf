@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <format>
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
 std::string Library::GetFilename() const { return filename; };
@@ -307,10 +308,10 @@ std::vector<Book> Library::FilterByTrait(const std::string &trait) {
   // RATING
   if (trait.back() == '&') {
     for (int i = 0; i < library.size(); i++) {
-      std::string currentRating = std::to_string(library[i].GetRating());
-      std::string lowerRating = Helper::ToLowercase(currentRating);
+      float currentRating = library[i].GetRating();
+      std::string strRating = std::format("{:.1f}", currentRating);
 
-      if (lowerRating == compTrait) {
+      if (strRating == compTrait) {
         filteredBooks.push_back(library[i]);
       }
     }
