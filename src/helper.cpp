@@ -98,6 +98,9 @@ std::string ToStandardFormat(std::string word) {
     if (i == 0 || word[i - 1] == ' ' || word[i - 1] == '(' ||
         word[i - 1] == '.') {
       letter = static_cast<char>(std::toupper(letter));
+    } else {
+      // If the letter is not the first, ensure it's lowercase
+      letter = std::tolower(letter);
     }
 
     // To ensure all letters still get added to return string
