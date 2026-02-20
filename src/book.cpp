@@ -24,9 +24,7 @@ std::ostream &operator<<(std::ostream &os, const Book &book) {
   return os;
 };
 
-bool Book::operator<(const Book &other) const {
-  return _title < other._title; 
-};
+bool Book::operator<(const Book &other) const { return _title < other._title; };
 
 // GETTERS
 std::string Book::GetTitle() const { return _title; };
@@ -47,9 +45,9 @@ std::string Book::GetStrStatus() const {
 };
 
 // SETTERS
-void Book::SetTitle(std::string title) { _title = title; };
+void Book::SetTitle(std::string title) { _title = Helper::ToStandardFormat(title); };
 
-void Book::SetAuthor(std::string author) { _author = author; };
+void Book::SetAuthor(std::string author) { _author = Helper::ToStandardFormat(author); };
 
 void Book::SetIsbn(std::string isbn) { _isbn = isbn; };
 
