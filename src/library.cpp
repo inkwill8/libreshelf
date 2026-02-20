@@ -323,23 +323,33 @@ Book Library::EditBook(const std::string &bookName, const std::string &title,
                        const std::string &author, const std::string &isbn,
                        const std::string &genre, const std::string &status,
                        const std::string &rating) {
-  // Search for the book to edit and validate case
-  auto searchResults = SearchBooks(bookName);
   std::string lowerBookName = Helper::ToLowercase(bookName);
+  bool foundBook = false;
 
   // Instance of a default book for return
   Book editedBook;
 
-  for (int i = 0; i < searchResults.size(); i++) {
-    Book currentBook = *searchResults[i];
+  // Search library and replace desired book in-place
+  for (int i = 0; i < library.size(); i++) {
+    Book currentBook = library[i];
     if (Helper::ToLowercase(currentBook.GetTitle()) == lowerBookName) {
-      editedBook.SetTitle(title);
-      editedBook.SetAuthor(author);
-      editedBook.SetIsbn(isbn);
-      editedBook.SetGenre(Helper::StrToGenre(genre));
-      editedBook.SetStatus(Helper::StrToStatus(status));
-      editedBook.SetRating(std::stof(rating));
+      currentBook.SetTitle(title);
+      currentBook.SetAuthor(author);
+      currentBook.SetIsbn(isbn);
+      currentBook.SetGenre(Helper::StrToGenre(genre));
+      currentBook.SetStatus(Helper::StrToStatus(status));
+      currentBook.SetRating(std::stof(rating));
+
+      editedBook = currentBook;
+      foundBook = true;
+
+      // Rewrite the CSV file
+      if (foundBook) {
+        std::sort(library.begin(), library.end());
+        WriteToCSV(filename);
+      }
     }
   }
+
   return editedBook;
 };

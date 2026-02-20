@@ -247,6 +247,52 @@ void Menu::DisplayMainMenu() {
     }
 
     case 5: { // EDIT BOOK
+      std::cin.ignore();
+      std::string bookName;
+      std::string title;
+      std::string author;
+      std::string isbn;
+      std::string genre;
+      std::string status;
+      std::string rating;
+
+      std::cout << "\n\n=== Edit Book ===\n";
+      std::cout << "Which book would you like to edit?\n";
+      std::cout << "Enter Book Name: ";
+      std::getline(std::cin, bookName);
+
+      std::cout << "\n == " << Helper::ToStandardFormat(bookName) << " ==\n";
+      std::cout << "New Title: ";
+      std::getline(std::cin, title);
+
+      std::cout << "New Author: ";
+      std::getline(std::cin, author);
+
+      std::cout << "New ISBN: ";
+      std::getline(std::cin, isbn);
+
+      std::cout << "New Genre: ";
+      std::getline(std::cin, genre);
+
+      std::cout << "New Status: ";
+      std::getline(std::cin, status);
+
+      std::cout << "New Rating: ";
+      std::getline(std::cin, rating);
+
+      Book updatedBook = library.EditBook(bookName, title, author, isbn, genre,
+                                          status, rating);
+      if (updatedBook.GetTitle().empty()) {
+        std::cout << "Book '" << Helper::ToStandardFormat(bookName)
+                  << "' was not found.\n\n";
+      } else {
+
+        std::cout << "== Updated " << Helper::ToStandardFormat(bookName)
+                  << " ==\n";
+        std::cout << updatedBook << std::endl;
+      }
+
+      break;
     }
 
     case 6: { // EDIT METADATA
