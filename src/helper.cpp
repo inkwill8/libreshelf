@@ -3,6 +3,8 @@
 
 namespace Helper {
 Genre StrToGenre(std::string genre) {
+  genre = ToStandardFormat(genre);
+
   if (genre == "Biography")
     return Genre::BIOGRAPHY;
   if (genre == "Memoir")
