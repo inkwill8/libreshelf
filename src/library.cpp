@@ -331,16 +331,16 @@ Book Library::EditBook(const std::string &bookName, const std::string &title,
 
   // Search library and replace desired book in-place
   for (int i = 0; i < library.size(); i++) {
-    Book currentBook = library[i];
-    if (Helper::ToLowercase(currentBook.GetTitle()) == lowerBookName) {
-      currentBook.SetTitle(title);
-      currentBook.SetAuthor(author);
-      currentBook.SetIsbn(isbn);
-      currentBook.SetGenre(Helper::StrToGenre(genre));
-      currentBook.SetStatus(Helper::StrToStatus(status));
-      currentBook.SetRating(std::stof(rating));
+    Book* currentBook = &library[i];
+    if (Helper::ToLowercase(currentBook->GetTitle()) == lowerBookName) {
+      currentBook->SetTitle(title);
+      currentBook->SetAuthor(author);
+      currentBook->SetIsbn(isbn);
+      currentBook->SetGenre(Helper::StrToGenre(genre));
+      currentBook->SetStatus(Helper::StrToStatus(status));
+      currentBook->SetRating(std::stof(rating));
 
-      editedBook = currentBook;
+      editedBook = *currentBook;
       foundBook = true;
 
       // Rewrite the CSV file

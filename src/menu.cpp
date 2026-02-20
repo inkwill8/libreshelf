@@ -287,7 +287,7 @@ void Menu::DisplayMainMenu() {
                   << "' was not found.\n\n";
       } else {
 
-        std::cout << "== Updated " << Helper::ToStandardFormat(bookName)
+        std::cout << "\n== Updated " << Helper::ToStandardFormat(bookName)
                   << " ==\n";
         std::cout << updatedBook << std::endl;
       }
