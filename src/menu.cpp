@@ -256,19 +256,10 @@ void Menu::DisplayMainMenu() {
       std::getline(std::cin, bookName);
 
       // First, check if the book is even in the library
-      bool wasFound = false;
-
       std::vector<Book *> results = library.SearchBooks(bookName);
-      for (int i = 0; i < results.size(); i++) {
-        if (results[i]->GetTitle() == Helper::ToStandardFormat(bookName)) {
-          wasFound = true;
-        } else {
-          std::cout << "\nBook not found.";
-          break;
-        }
-      }
-
-      if (wasFound) {
+      if (results.empty()) {
+        std::cout << "\nBook not found.";
+      } else {
         std::cout << "\n == " << Helper::ToStandardFormat(bookName) << " ==\n";
         std::cout << "New Title: ";
         std::getline(std::cin, title);
