@@ -1,10 +1,10 @@
 #include "../include/library.h"
 #include "../include/helper.h"
 #include <algorithm>
+#include <format>
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <format>
 
 std::vector<Book> Library::GetAllBooks() const { return library; };
 std::string Library::GetFilename() const { return filename; };
@@ -317,4 +317,29 @@ std::vector<Book> Library::FilterByTrait(const std::string &trait) {
     }
   }
   return filteredBooks;
+};
+
+Book Library::EditBook(const std::string &bookName, const std::string &title,
+                       const std::string &author, const std::string &isbn,
+                       const std::string &genre, const std::string &status,
+                       const std::string &rating) {
+  // Search for the book to edit and validate case
+  auto searchResults = SearchBooks(bookName);
+  std::string lowerBookName = Helper::ToLowercase(bookName);
+
+  // Instance of a default book for return
+  Book editedBook;
+
+  for (int i = 0; i < searchResults.size(); i++) {
+    Book currentBook = *searchResults[i];
+    if (Helper::ToLowercase(currentBook.GetTitle()) == lowerBookName) {
+      editedBook.SetTitle(title);
+      editedBook.SetAuthor(author);
+      editedBook.SetIsbn(isbn);
+      editedBook.SetGenre(Helper::StrToGenre(genre));
+      editedBook.SetStatus(Helper::StrToStatus(status));
+      editedBook.SetRating(std::stof(rating));
+    }
+  }
+  return editedBook;
 };
