@@ -331,7 +331,7 @@ Book Library::EditBook(const std::string &bookName, const std::string &title,
 
   // Search library and replace desired book in-place
   for (int i = 0; i < library.size(); i++) {
-    Book* currentBook = &library[i];
+    Book *currentBook = &library[i];
     if (Helper::ToLowercase(currentBook->GetTitle()) == lowerBookName) {
       currentBook->SetTitle(title);
       currentBook->SetAuthor(author);
