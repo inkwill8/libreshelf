@@ -287,6 +287,21 @@ std::vector<Book> Library::FilterByGenre(const std::string &genre) {
   return filteredBooks;
 };
 
+std::vector<Book> Library::FilterByStatus(const std::string &status) {
+  std::vector<Book> filteredBooks;
+  std::string lowerStatus = Helper::ToLowercase(status);
+
+  for (int i = 0; i < library.size(); i++) {
+    std::string currentBookStatus =
+        Helper::ToLowercase(library[i].GetStrStatus());
+    if (currentBookStatus == lowerStatus) {
+      filteredBooks.push_back(library[i]);
+    }
+  }
+
+  return filteredBooks;
+};
+
 Book Library::EditBook(const std::string &bookName, const std::string &title,
                        const std::string &author, const std::string &isbn,
                        const std::string &genre, const std::string &status,

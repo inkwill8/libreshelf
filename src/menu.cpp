@@ -165,7 +165,12 @@ void Menu::DisplayMainMenu() {
 
         if (choice >= 1 && choice <= 5) {
           std::cout << "\n\n== " << Helper::ToStandardFormat(status) << " ==\n";
-          status.push_back('^');
+          std::vector<Book> results = library.FilterByStatus(status);
+
+          for (const Book &book : results) {
+            std::cout << book << "\n";
+          }
+          std::cout << results.size() << " results found." << std::endl;
         }
         break;
       }
