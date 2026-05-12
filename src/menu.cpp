@@ -42,7 +42,12 @@ void Menu::DisplayMainMenu() {
 
         std::cout << "\n\n== Books by " << Helper::ToStandardFormat(author)
                   << " ==\n";
-        trait = Helper::ToLowercase(author);
+        std::vector<Book> results = library.FilterByAuthor(author);
+
+        for (const Book &book : results) {
+          std::cout << book << "/n";
+            }
+
         isValid = true;
         break;
       }
