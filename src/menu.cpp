@@ -42,8 +42,6 @@ void Menu::DisplayMainMenu() {
 
         std::cout << "\n\n== Books by " << Helper::ToStandardFormat(author)
                   << " ==\n";
-        author.push_back('$'); // Add an identifier to the end of the string so
-                               // FilterByStatus knows what type of trait it is
         trait = Helper::ToLowercase(author);
         isValid = true;
         break;

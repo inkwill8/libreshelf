@@ -253,70 +253,20 @@ Book Library::EditMetadata(const std::string &bookName,
   return editedBook;
 };
 
-std::vector<Book> Library::FilterByTrait(const std::string &trait) {
-  // Each string will have a special character appended to the end
-  // '$' = author
-  // '%' = genre
-  // '^' = status
-  // '&' = rating
-
-  // Make a new copy of trait without the special character (for comparison)
-  std::string compTrait = trait;
-  compTrait.pop_back();
-
-  // Declare a vector to hold return results
-  std::vector<Book> filteredBooks;
-
-  // Decide which member field of book objects to check depending on the trait
-
-  // AUTHOR
-  if (trait.back() == '$') {
-    for (int i = 0; i < library.size(); i++) {
-      std::string currentAuthor = library[i].GetAuthor();
-      std::string lowerAuthor = Helper::ToLowercase(currentAuthor);
-
-      if (lowerAuthor.contains(compTrait)) {
-        filteredBooks.push_back(library[i]);
-      }
+std::vector<std::string> Library::FilterByAuthor(const std::string &authorName) {
+  // Placeholder vector for return
+  std::vector<std::string> filteredAuthors;
+  
+ // Search the in-memory library for the author
+  // Iterate over the vector to gain access to each element
+  for (int i = 0; i < library.size(); i++) {
+       std::string currentAuthor = library[i].GetAuthor();
+       if (currentAuthor.contains(authorName)) {
+          filteredAuthors.push_back(currentAuthor);
     }
   }
 
-  // GENRE
-  if (trait.back() == '%') {
-    for (int i = 0; i < library.size(); i++) {
-      std::string currentGenre = library[i].GetStrGenre();
-      std::string lowerGenre = Helper::ToLowercase(currentGenre);
-
-      if (lowerGenre == compTrait) {
-        filteredBooks.push_back(library[i]);
-      }
-    }
-  }
-
-  // STATUS
-  if (trait.back() == '^') {
-    for (int i = 0; i < library.size(); i++) {
-      std::string currentStatus = library[i].GetStrStatus();
-      std::string lowerStatus = Helper::ToLowercase(currentStatus);
-
-      if (lowerStatus == compTrait) {
-        filteredBooks.push_back(library[i]);
-      }
-    }
-  }
-
-  // RATING
-  if (trait.back() == '&') {
-    for (int i = 0; i < library.size(); i++) {
-      float currentRating = library[i].GetRating();
-      std::string strRating = std::format("{:.1f}", currentRating);
-
-      if (strRating == compTrait) {
-        filteredBooks.push_back(library[i]);
-      }
-    }
-  }
-  return filteredBooks;
+  return filteredAuthors;
 };
 
 Book Library::EditBook(const std::string &bookName, const std::string &title,
