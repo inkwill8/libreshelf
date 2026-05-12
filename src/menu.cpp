@@ -21,8 +21,6 @@ void Menu::DisplayMainMenu() {
 
     case 2: { // FILTER BY TRAIT
       int numericChoice;
-      std::string trait;
-      bool isValid;
 
       std::cout << "\n\n=== Filter by Trait ===\n";
       std::cout << "Which trait would you like to filter by?\n";
@@ -42,13 +40,13 @@ void Menu::DisplayMainMenu() {
 
         std::cout << "\n\n== Books by " << Helper::ToStandardFormat(author)
                   << " ==\n";
+
         std::vector<Book> results = library.FilterByAuthor(author);
 
         for (const Book &book : results) {
           std::cout << book << "/n";
-            }
+        }
 
-        isValid = true;
         break;
       }
 
@@ -116,8 +114,6 @@ void Menu::DisplayMainMenu() {
           std::cout << "\n\n== " << genre << " Books ==\n";
 
           genre.push_back('%');
-          trait = Helper::ToLowercase(genre);
-          isValid = true;
         }
         break;
       }
@@ -164,8 +160,6 @@ void Menu::DisplayMainMenu() {
         if (choice >= 1 && choice <= 5) {
           std::cout << "\n\n== " << Helper::ToStandardFormat(status) << " ==\n";
           status.push_back('^');
-          trait = Helper::ToLowercase(status);
-          isValid = true;
         }
         break;
       }
@@ -183,25 +177,14 @@ void Menu::DisplayMainMenu() {
 
         std::cout << "\n\n== " << rating << " Rated Books ==\n";
         rating.push_back('&');
-        trait = rating;
-        isValid = true;
         break;
       }
+
       default:
         std::cout << "Invalid choice.\n\n";
-        isValid = false;
         break;
       }
 
-      // Call FilterByTrait passing user given trait
-      if (isValid) {
-        std::vector<Book> filteredResults = library.FilterByTrait(trait);
-        for (auto &result : filteredResults) {
-          std::cout << result << "\n";
-        }
-
-        std::cout << filteredResults.size() << " results found.\n\n";
-      }
       break;
     }
     case 3: { // SEARCH FOR BOOK
