@@ -45,9 +45,13 @@ std::string Book::GetStrStatus() const {
 };
 
 // SETTERS
-void Book::SetTitle(std::string title) { _title = Helper::ToStandardFormat(title); };
+void Book::SetTitle(std::string title) {
+  _title = Helper::ToStandardFormat(title);
+};
 
-void Book::SetAuthor(std::string author) { _author = Helper::ToStandardFormat(author); };
+void Book::SetAuthor(std::string author) {
+  _author = Helper::ToStandardFormat(author);
+};
 
 void Book::SetIsbn(std::string isbn) { _isbn = isbn; };
 
