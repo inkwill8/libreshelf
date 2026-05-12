@@ -44,8 +44,10 @@ void Menu::DisplayMainMenu() {
         std::vector<Book> results = library.FilterByAuthor(author);
 
         for (const Book &book : results) {
-          std::cout << book << "/n";
+          std::cout << book << "\n";
         }
+
+        std::cout << results.size() << " results found." << std::endl;
 
         break;
       }

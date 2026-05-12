@@ -256,12 +256,15 @@ Book Library::EditMetadata(const std::string &bookName,
 std::vector<Book> Library::FilterByAuthor(const std::string &authorName) {
   // Placeholder vector for return
   std::vector<Book> filteredBooks;
+
+  // Standardize string format
+  std::string lowerAuthorName = Helper::ToLowercase(authorName);
   
  // Search the in-memory library for the author
   // Iterate over the vector to gain access to each element
   for (int i = 0; i < library.size(); i++) {
-       std::string currentBookAuthor = library[i].GetAuthor();
-       if (currentBookAuthor.contains(authorName)) {
+       std::string currentBookAuthor = Helper::ToLowercase(library[i].GetAuthor());
+       if (currentBookAuthor.contains(lowerAuthorName)) {
           filteredBooks.push_back(library[i]);
     }
   }
