@@ -253,20 +253,20 @@ Book Library::EditMetadata(const std::string &bookName,
   return editedBook;
 };
 
-std::vector<std::string> Library::FilterByAuthor(const std::string &authorName) {
+std::vector<Book> Library::FilterByAuthor(const std::string &authorName) {
   // Placeholder vector for return
-  std::vector<std::string> filteredAuthors;
+  std::vector<Book> filteredBooks;
   
  // Search the in-memory library for the author
   // Iterate over the vector to gain access to each element
   for (int i = 0; i < library.size(); i++) {
-       std::string currentAuthor = library[i].GetAuthor();
-       if (currentAuthor.contains(authorName)) {
-          filteredAuthors.push_back(currentAuthor);
+       std::string currentBookAuthor = library[i].GetAuthor();
+       if (currentBookAuthor.contains(authorName)) {
+          filteredBooks.push_back(library[i]);
     }
   }
 
-  return filteredAuthors;
+  return filteredBooks;
 };
 
 Book Library::EditBook(const std::string &bookName, const std::string &title,
