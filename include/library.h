@@ -18,6 +18,7 @@ private:
 public:
   void LoadLibrary(const std::string &filename);
   std::vector<Book> FilterByAuthor(const std::string &authorName);
+  std::vector<Book> FilterByGenre(const std::string &genre);
   std::vector<Book *> SearchBooks(const std::string &bookName);
   bool AddBook(std::string &title, std::string &author, std::string &isbn,
                std::string &genre, std::string &status, std::string &rating);

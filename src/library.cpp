@@ -259,13 +259,28 @@ std::vector<Book> Library::FilterByAuthor(const std::string &authorName) {
 
   // Standardize string format
   std::string lowerAuthorName = Helper::ToLowercase(authorName);
-  
- // Search the in-memory library for the author
+
+  // Search the in-memory library for the author
   // Iterate over the vector to gain access to each element
   for (int i = 0; i < library.size(); i++) {
-       std::string currentBookAuthor = Helper::ToLowercase(library[i].GetAuthor());
-       if (currentBookAuthor.contains(lowerAuthorName)) {
-          filteredBooks.push_back(library[i]);
+    std::string currentBookAuthor = Helper::ToLowercase(library[i].GetAuthor());
+    if (currentBookAuthor.contains(lowerAuthorName)) {
+      filteredBooks.push_back(library[i]);
+    }
+  }
+
+  return filteredBooks;
+};
+
+std::vector<Book> Library::FilterByGenre(const std::string &genre) {
+  std::vector<Book> filteredBooks;
+  std::string lowerGenre = Helper::ToLowercase(genre);
+
+  for (int i = 0; i < library.size(); i++) {
+    std::string currentBookGenre =
+        Helper::ToLowercase(library[i].GetStrGenre());
+    if (currentBookGenre == lowerGenre) {
+      filteredBooks.push_back(library[i]);
     }
   }
 

@@ -114,8 +114,12 @@ void Menu::DisplayMainMenu() {
 
         if (choice >= 1 && choice <= 10) {
           std::cout << "\n\n== " << genre << " Books ==\n";
+          std::vector<Book> results = library.FilterByGenre(genre);
 
-          genre.push_back('%');
+          for (const Book &book : results) {
+            std::cout << book << "\n";
+          }
+          std::cout << results.size() << " results found." << std::endl;
         }
         break;
       }
