@@ -302,6 +302,20 @@ std::vector<Book> Library::FilterByStatus(const std::string &status) {
   return filteredBooks;
 };
 
+std::vector<Book> Library::FilterByRating(const std::string &rating) {
+  std::vector<Book> filteredBooks;
+  float validRating = std::stof(rating);
+
+  for (int i = 0; i < library.size(); i++) {
+    float currentBookRating = library[i].GetRating();
+    if (currentBookRating == validRating) {
+      filteredBooks.push_back(library[i]);
+    }
+  }
+
+  return filteredBooks;
+};
+
 Book Library::EditBook(const std::string &bookName, const std::string &title,
                        const std::string &author, const std::string &isbn,
                        const std::string &genre, const std::string &status,

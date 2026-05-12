@@ -187,7 +187,13 @@ void Menu::DisplayMainMenu() {
         std::getline(std::cin, rating);
 
         std::cout << "\n\n== " << rating << " Rated Books ==\n";
-        rating.push_back('&');
+        std::vector<Book> results = library.FilterByRating(rating);
+
+        for (const Book &book : results) {
+          std::cout << book << "\n";
+        }
+        std::cout << results.size() << " results found." << std::endl;
+
         break;
       }
 
