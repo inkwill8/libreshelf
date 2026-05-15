@@ -3,6 +3,8 @@
 #include <curl/easy.h>
 #include <iostream>
 
+using json = nlohmann::json;
+
 size_t OpenLibClient::WriteCallBack(void *contents, size_t size, size_t nmemb,
                                     std::string *output) {
   size_t totalSize = size * nmemb;
@@ -44,4 +46,29 @@ std::string OpenLibClient::UrlEncode(const std::string &input) {
   curl_easy_cleanup(curl);
 
   return result;
+};
+
+std::optional<std::vector<Book>>
+OpenLibClient::SearchByTitle(const std::string &title) {
+  std::string url =
+      "https://openlibrary.org/search.json?title=" + UrlEncode(title) +
+      "&limit=10";
+
+  std::string response = PerformGetRequest(url);
+
+  // Parse the JSON from the request
+  auto parsed = json::parse(response);
+  int numFound = parsed["numFound"];
+
+  std::vector<Book> results;
+
+  for (const auto &doc : parsed["docs"]) {
+    Book book;
+    book.SetTitle(doc["title"]);
+    book.SetAuthor(doc["author_name"][0]);
+    book.SetIsbn(doc["isbn"][0]);
+    results.push_back(book);
+  }
+
+  return results;
 };
