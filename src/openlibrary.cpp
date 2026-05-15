@@ -13,7 +13,8 @@ size_t OpenLibClient::WriteCallBack(void *contents, size_t size, size_t nmemb,
   return totalSize;
 };
 
-std::string OpenLibClient::PerformGetRequest(const std::string &url) {
+std::optional<std::string>
+OpenLibClient::PerformGetRequest(const std::string &url) {
   std::string responseBuffer;
   CURL *curl = curl_easy_init();
 
@@ -27,11 +28,13 @@ std::string OpenLibClient::PerformGetRequest(const std::string &url) {
     curl_easy_cleanup(curl);
 
     if (result != CURLE_OK) {
-      std::cout << curl_easy_strerror(result);
+      std::cerr << "Request failed: " << curl_easy_strerror(result) << "\n";
+      return std::nullopt;
     }
 
   } else {
-    std::cout << "Curl handle was not initialized." << std::endl;
+    std::cerr << "Curl handle was not initialized.\n";
+    return std::nullopt;
   }
 
   return responseBuffer;
@@ -52,21 +55,42 @@ std::optional<std::vector<Book>>
 OpenLibClient::SearchByTitle(const std::string &title) {
   std::string url =
       "https://openlibrary.org/search.json?title=" + UrlEncode(title) +
-      "&limit=10";
+      "&fields=title,author_name,isbn,first_publish_year,edition_count" +
+      "&limit=20";
 
-  std::string response = PerformGetRequest(url);
+  std::optional<std::string> response = PerformGetRequest(url);
+
+  if (!response.has_value()) {
+    return std::nullopt; // network failed
+  }
 
   // Parse the JSON from the request
-  auto parsed = json::parse(response);
-  int numFound = parsed["numFound"];
+  json parsed = json::parse(*response, nullptr, false);
+  if (parsed.is_discarded()) {
+    std::cerr << "Failed to parse response.\n";
+    return std::nullopt;
+  }
 
   std::vector<Book> results;
 
+  // no docs field but request went through, return empty vector
+  if (!parsed.contains("docs") || !parsed["docs"].is_array()) {
+    return results;
+  }
+
   for (const auto &doc : parsed["docs"]) {
     Book book;
-    book.SetTitle(doc["title"]);
-    book.SetAuthor(doc["author_name"][0]);
-    book.SetIsbn(doc["isbn"][0]);
+
+    if (doc.contains("title")) {
+      book.SetTitle(doc["title"]);
+    }
+    if (doc.contains("author_name") && !doc["author_name"].empty()) {
+      book.SetAuthor(doc["author_name"][0]);
+    }
+    if (doc.contains("isbn") && !doc["isbn"].empty()) {
+      book.SetIsbn(doc["isbn"][0]);
+    }
+
     results.push_back(book);
   }
 

@@ -10,7 +10,7 @@ private:
   // Helper methods to perform the curl get request and return the raw string
   static size_t WriteCallBack(void *contents, size_t size, size_t nmemb,
                               std::string *output);
-  std::string PerformGetRequest(const std::string &url);
+  std::optional<std::string> PerformGetRequest(const std::string &url);
   std::string UrlEncode(const std::string &input);
 
 public:

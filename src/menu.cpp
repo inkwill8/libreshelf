@@ -335,6 +335,34 @@ void Menu::DisplayMainMenu() {
 
       break;
     }
+
+    case 8: { // SEARCH OPEN LIBRARY
+      std::cin.ignore();
+      std::string bookTitle;
+
+      std::cout << "\n\n=== Search Open Library ===\n";
+      std::cout << "Enter Title: ";
+      std::getline(std::cin, bookTitle);
+
+      std::optional<std::vector<Book>> results =
+          client.SearchByTitle(bookTitle);
+
+      if (!results.has_value()) {
+        std::cout << "\nCouldn't reach Open Library. Check connection.\n";
+      } else if (results->empty()) {
+        std::cout << "\nNo matching books found.\n";
+      } else {
+        std::cout << "\n== OPEN LIBRARY RESULTS ==" << std::endl;
+        int counter = 1;
+
+        for (const auto &result : *results) {
+          std::cout << counter << ". " << result << "\n";
+          counter++;
+        }
+      }
+
+      break;
+    }
     }
   } while (userChoice != 0);
 };
@@ -360,6 +388,7 @@ void Menu::DisplayMenuOptions() {
   std::cout << "5. Edit Book\n";
   std::cout << "6. Edit Metadata\n";
   std::cout << "7. Remove Book\n";
+  std::cout << "8. Search Open Library\n";
   std::cout << "0. Quit LibreShelf\n";
   std::cout << "Choice: ";
 };
