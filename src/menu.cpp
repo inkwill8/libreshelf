@@ -338,27 +338,63 @@ void Menu::DisplayMainMenu() {
 
     case 8: { // SEARCH OPEN LIBRARY
       std::cin.ignore();
-      std::string bookTitle;
+      int choice;
 
       std::cout << "\n\n=== Search Open Library ===\n";
-      std::cout << "Enter Title: ";
-      std::getline(std::cin, bookTitle);
+      std::cout << "1. Search by Title\n";
+      std::cout << "2. Search by Author\n";
+      std::cout << "Choice: ";
+      std::cin >> choice;
 
-      std::optional<std::vector<Book>> results =
-          client.SearchByTitle(bookTitle);
+      switch (choice) {
+      case 1: { // SEARCH BY TITLE
+        std::cin.ignore();
+        std::string bookTitle;
+        std::cout << "\nEnter Title: ";
+        std::getline(std::cin, bookTitle);
 
-      if (!results.has_value()) {
-        std::cout << "\nCouldn't reach Open Library. Check connection.\n";
-      } else if (results->empty()) {
-        std::cout << "\nNo matching books found.\n";
-      } else {
-        std::cout << "\n== OPEN LIBRARY RESULTS ==" << std::endl;
-        int counter = 1;
+        std::optional<std::vector<Book>> results =
+            client.SearchByTitle(bookTitle);
 
-        for (const auto &result : *results) {
-          std::cout << counter << ". " << result << "\n";
-          counter++;
+        if (!results.has_value()) {
+          std::cout << "\nCouldn't reach Open Library. Check connection.\n";
+        } else if (results->empty()) {
+          std::cout << "\nNo matching books found.\n";
+        } else {
+          std::cout << "\n== OPEN LIBRARY RESULTS ==" << std::endl;
+          int counter = 1;
+
+          for (const auto &result : *results) {
+            std::cout << counter << ". " << result << "\n";
+            counter++;
+          }
         }
+        break;
+      }
+      case 2: { // SEARCH BY AUTHOR
+        std::cin.ignore();
+        std::string author;
+        std::cout << "Author Name: ";
+        std::getline(std::cin, author);
+
+        std::optional<std::vector<Book>> results =
+            client.SearchByAuthor(author);
+
+        if (!results.has_value()) {
+          std::cout << "\nCouldn't reach Open Library. Check connection.\n";
+        } else if (results->empty()) {
+          std::cout << "\nNo matching books found.\n";
+        } else {
+          std::cout << "\n== OPEN LIBRARY RESULTS ==" << std::endl;
+          int counter = 1;
+
+          for (const auto &result : *results) {
+            std::cout << counter << ". " << result << "\n";
+            counter++;
+          }
+        }
+        break;
+      }
       }
 
       break;

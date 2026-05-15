@@ -15,8 +15,8 @@ private:
 
 public:
   std::optional<std::vector<Book>> SearchByTitle(const std::string &title);
+  std::optional<std::vector<Book>> SearchByAuthor(const std::string &author);
   std::optional<std::vector<Book>> SearchByIsbn(const std::string &isbn);
-  std::optional<std::vector<Book>> SearchByAuthor(const std::string &isbn);
 
   // In case we want to include series search functionality and parsing of
   // OpenLibrary edition info

@@ -96,3 +96,50 @@ OpenLibClient::SearchByTitle(const std::string &title) {
 
   return results;
 };
+
+std::optional<std::vector<Book>>
+OpenLibClient::SearchByAuthor(const std::string &author) {
+
+  std::string url =
+      "https://openlibrary.org/search.json?author=" + UrlEncode(author) +
+      "&fields=title,author_name,isbn,first_publish_year,edition_count" +
+      "&limit=20";
+
+  std::optional<std::string> response = PerformGetRequest(url);
+
+  if (!response.has_value()) {
+    return std::nullopt; // network failed
+  }
+
+  // Parse the JSON from the request
+  json parsed = json::parse(*response, nullptr, false);
+  if (parsed.is_discarded()) {
+    std::cerr << "Failed to parse response.\n";
+    return std::nullopt;
+  }
+
+  std::vector<Book> results;
+
+  // no docs field but request went through, return empty vector
+  if (!parsed.contains("docs") || !parsed["docs"].is_array()) {
+    return results;
+  }
+
+  for (const auto &doc : parsed["docs"]) {
+    Book book;
+
+    if (doc.contains("title")) {
+      book.SetTitle(doc["title"]);
+    }
+    if (doc.contains("author_name") && !doc["author_name"].empty()) {
+      book.SetAuthor(doc["author_name"][0]);
+    }
+    if (doc.contains("isbn") && !doc["isbn"].empty()) {
+      book.SetIsbn(doc["isbn"][0]);
+    }
+
+    results.push_back(book);
+  }
+
+  return results;
+};
