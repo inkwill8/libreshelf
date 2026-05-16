@@ -131,39 +131,12 @@ OpenLibClient::SearchByAuthor(const std::string &author) {
 
   std::optional<std::string> response = PerformGetRequest(url);
 
-  if (!response.has_value()) {
-    return std::nullopt; // network failed
-  }
-
-  // Parse the JSON from the request
-  json parsed = json::parse(*response, nullptr, false);
-  if (parsed.is_discarded()) {
-    std::cerr << "Failed to parse response.\n";
+  std::optional<json> parsed = ParseJSON(response);
+  if (parsed == std::nullopt) {
     return std::nullopt;
   }
 
-  std::vector<Book> results;
-
-  // no docs field but request went through, return empty vector
-  if (!parsed.contains("docs") || !parsed["docs"].is_array()) {
-    return results;
-  }
-
-  for (const auto &doc : parsed["docs"]) {
-    Book book;
-
-    if (doc.contains("title")) {
-      book.SetTitle(doc["title"]);
-    }
-    if (doc.contains("author_name") && !doc["author_name"].empty()) {
-      book.SetAuthor(doc["author_name"][0]);
-    }
-    if (doc.contains("isbn") && !doc["isbn"].empty()) {
-      book.SetIsbn(doc["isbn"][0]);
-    }
-
-    results.push_back(book);
-  }
+  std::vector<Book> results = BuildBooks(parsed);
 
   return results;
 };
