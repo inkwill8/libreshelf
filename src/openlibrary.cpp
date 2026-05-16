@@ -111,12 +111,12 @@ OpenLibClient::SearchByTitle(const std::string &title) {
   // This checks if the network request went thru and if the JSON was parsed
   // properly
   std::optional<json> parsed = ParseJSON(response);
-  if (parsed == std::nullopt) {
+  if (!parsed.has_value()) {
     return std::nullopt;
   }
 
   // If everything checks out, we build a Books vector based on the results
-  std::vector<Book> results = BuildBooks(parsed);
+  std::vector<Book> results = BuildBooks(*parsed);
 
   return results;
 };
@@ -126,6 +126,26 @@ OpenLibClient::SearchByAuthor(const std::string &author) {
 
   std::string url =
       "https://openlibrary.org/search.json?author=" + UrlEncode(author) +
+      "&fields=title,author_name,isbn,first_publish_year,edition_count" +
+      "&limit=20";
+
+  std::optional<std::string> response = PerformGetRequest(url);
+
+  std::optional<json> parsed = ParseJSON(response);
+  if (!parsed.has_value()) {
+    return std::nullopt;
+  }
+
+  std::vector<Book> results = BuildBooks(*parsed);
+
+  return results;
+};
+
+std::optional<std::vector<Book>>
+OpenLibClient::SearchByIsbn(const std::string &isbn) {
+
+  std::string url =
+      "https://openlibrary.org/search.json?isbn=" + UrlEncode(isbn) +
       "&fields=title,author_name,isbn,first_publish_year,edition_count" +
       "&limit=20";
 
