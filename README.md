@@ -1,35 +1,47 @@
 # LibreShelf
 
-A simple command-line application for managing a personal library.
+A command-line application for managing a personal library.
 
 ## Description
 
-LibreShelf allows you to keep a digital record of your books. You can add new books, view your entire collection, find specific books, and remove books from your library. All data is handled locally on your machine.
+LibreShelf lets you keep a digital record of your books locally. You can add, list, filter, search, edit, and remove books from your collection. It also includes an Open Library lookup so you can search for books by title, author, or ISBN without typing the details yourself.
 
-## How to Compile and Run
+## Dependencies
 
-This project is written in C++. You will need a C++ compiler (like g++) to build and run it.
+- A C++ compiler with C++23 support (g++ 13+)
+- `libcurl` development headers
+- `make`
 
-1.  **Navigate to the source directory:**
-    ```bash
-    cd src
-    ```
+On Arch: `sudo pacman -S curl`
+On Debian/Ubuntu: `sudo apt install libcurl4-openssl-dev`
 
-2.  **Compile the project:**
-    ```bash
-    g++ main.cpp book.cpp menu.cpp helper.cpp -o libreshelf
-    ```
+The `nlohmann/json` library is included as a single header in the `include/` directory, so no separate install is needed.
 
-3.  **Run the application:**
-    ```bash
-    ./libreshelf
-    ```
+## Build and Run
+
+```bash
+make
+./libreshelf
+```
+
+To clean up build artifacts:
+
+```bash
+make clean
+```
 
 ## Usage
 
-Once the application is running, you will be presented with a menu of options:
+The menu presents the following options:
 
-*   **Add a new book:** Add a book to your collection by providing a title and author.
-*   **Print library:** Display a list of all the books currently in your library.
-*   **Find a book:** Search for a specific book in your library.
-*   **Delete a book:** Remove a book from your library.
+1. List all books
+2. Filter by trait (author, genre, status, or rating)
+3. Search for a book by title
+4. Add a book
+5. Edit a book
+6. Edit a single field of a book
+7. Remove a book
+8. Search Open Library (by title, author, or ISBN)
+0. Quit
+
+Library data is stored in `data/books.csv`.
