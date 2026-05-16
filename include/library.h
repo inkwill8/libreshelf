@@ -31,6 +31,7 @@ public:
   Book EditMetadata(const std::string &bookName, const std::string &field,
                     const std::string &newData);
   bool RemoveBook(const std::string &bookToDelete);
+  bool AddFromOpenLib(const Book &book);
 
   std::vector<Book> GetAllBooks() const;
   std::string GetFilename() const;

@@ -350,3 +350,16 @@ Book Library::EditBook(const std::string &bookName, const std::string &title,
 
   return editedBook;
 };
+
+bool Library::AddFromOpenLib(const Book &book) {
+  // Take the input book from Open Library and add it locally
+  library.push_back(book);
+
+  bool isAppended = AppendToCSV(filename, book);
+
+  // Re-sort by reloading
+  library.clear();
+  LoadLibrary(filename);
+
+  return isAppended;
+};
