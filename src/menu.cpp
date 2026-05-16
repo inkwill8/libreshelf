@@ -371,14 +371,15 @@ void Menu::DisplayMainMenu() {
           }
         }
         std::cout << "\nWould you like to add a book from Open Library?\n";
-        std::cout << "\nChoice (choose 1 - 20, 0 to abort): ";
+        std::cout << "\nChoice (choose 1 - " << results->size()
+                  << ", 0 to abort): ";
         int bookChoice;
         std::cin >> bookChoice;
 
         if (bookChoice == 0) {
           break;
 
-        } else if (bookChoice >= 1 && bookChoice <= 20) {
+        } else if (bookChoice >= 1 && bookChoice <= results->size()) {
           Book book = results->at(bookChoice - 1);
           bool isAdded = library.AddFromOpenLib(book);
           if (isAdded) {
@@ -386,6 +387,7 @@ void Menu::DisplayMainMenu() {
             break;
           } else {
             std::cerr << "Something went wrong!\n";
+            break;
           }
 
         } else {
