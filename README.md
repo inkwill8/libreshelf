@@ -17,6 +17,16 @@ On Debian/Ubuntu: `sudo apt install libcurl4-openssl-dev`
 
 The `nlohmann/json` library is included as a single header in the `include/` directory, so no separate install is needed.
 
+## Setup
+
+Before running for the first time, copy the template CSV to create your local library file:
+
+```bash
+cp data/books_template.csv data/books.csv
+```
+
+Your library data will be saved to `data/books.csv` and is not tracked by git.
+
 ## Build and Run
 
 ```bash
@@ -43,5 +53,3 @@ The menu presents the following options:
 7. Remove a book
 8. Search Open Library (by title, author, or ISBN)
 0. Quit
-
-Library data is stored in `data/books.csv`.
