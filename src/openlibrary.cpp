@@ -51,14 +51,8 @@ std::string OpenLibClient::UrlEncode(const std::string &input) {
   return result;
 };
 
-std::optional<std::vector<Book>>
-OpenLibClient::SearchByTitle(const std::string &title) {
-  std::string url =
-      "https://openlibrary.org/search.json?title=" + UrlEncode(title) +
-      "&fields=title,author_name,isbn,first_publish_year,edition_count" +
-      "&limit=20";
-
-  std::optional<std::string> response = PerformGetRequest(url);
+std::optional<nlohmann::json>
+OpenLibClient::ParseJSON(std::optional<std::string> &response) {
 
   if (!response.has_value()) {
     return std::nullopt; // network failed
@@ -66,10 +60,16 @@ OpenLibClient::SearchByTitle(const std::string &title) {
 
   // Parse the JSON from the request
   json parsed = json::parse(*response, nullptr, false);
-  if (parsed.is_discarded()) {
+
+  if (parsed.is_discarded()) { // parsing error
     std::cerr << "Failed to parse response.\n";
     return std::nullopt;
   }
+
+  return parsed;
+};
+
+std::vector<Book> OpenLibClient::BuildBooks(const nlohmann::json &parsed) {
 
   std::vector<Book> results;
 
@@ -93,6 +93,30 @@ OpenLibClient::SearchByTitle(const std::string &title) {
 
     results.push_back(book);
   }
+
+  return results;
+};
+
+std::optional<std::vector<Book>>
+OpenLibClient::SearchByTitle(const std::string &title) {
+  std::string url =
+      "https://openlibrary.org/search.json?title=" + UrlEncode(title) +
+      "&fields=title,author_name,isbn,first_publish_year,edition_count" +
+      "&limit=20";
+
+  // Hit the OpenLibrary API endpoint
+  std::optional<std::string> response = PerformGetRequest(url);
+
+  // Use nlohmann::json to parse the raw response from OpenLibrary
+  // This checks if the network request went thru and if the JSON was parsed
+  // properly
+  std::optional<json> parsed = ParseJSON(response);
+  if (parsed == std::nullopt) {
+    return std::nullopt;
+  }
+
+  // If everything checks out, we build a Books vector based on the results
+  std::vector<Book> results = BuildBooks(parsed);
 
   return results;
 };

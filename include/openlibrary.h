@@ -13,6 +13,10 @@ private:
   std::optional<std::string> PerformGetRequest(const std::string &url);
   std::string UrlEncode(const std::string &input);
 
+  // Helper methods to parse JSON response and build native LibreShelf book objs
+  std::optional<nlohmann::json> ParseJSON(std::optional<std::string> &response);
+  std::vector<Book> BuildBooks(const nlohmann::json &parsed);
+
 public:
   std::optional<std::vector<Book>> SearchByTitle(const std::string &title);
   std::optional<std::vector<Book>> SearchByAuthor(const std::string &author);
