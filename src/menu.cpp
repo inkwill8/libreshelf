@@ -370,7 +370,28 @@ void Menu::DisplayMainMenu() {
             counter++;
           }
         }
-        break;
+        std::cout << "\nWould you like to add a book from Open Library?\n";
+        std::cout << "\nChoice (choose 1 - 20, 0 to abort): ";
+        int bookChoice;
+        std::cin >> bookChoice;
+
+        if (bookChoice == 0) {
+          break;
+
+        } else if (bookChoice >= 1 && bookChoice <= 20) {
+          Book book = results->at(bookChoice - 1);
+          bool isAdded = library.AddFromOpenLib(book);
+          if (isAdded) {
+            std::cout << "\n" << book.GetTitle() << " added!\n";
+            break;
+          } else {
+            std::cerr << "Something went wrong!\n";
+          }
+
+        } else {
+          std::cout << "Invalid choice.\n";
+          break;
+        }
       }
       case 2: { // SEARCH BY AUTHOR
         std::cin.ignore();
@@ -402,8 +423,7 @@ void Menu::DisplayMainMenu() {
         std::cout << "\nEnter ISBN: ";
         std::getline(std::cin, isbn);
 
-        std::optional<std::vector<Book>> results =
-            client.SearchByIsbn(isbn);
+        std::optional<std::vector<Book>> results = client.SearchByIsbn(isbn);
 
         if (!results.has_value()) {
           std::cout << "\nCouldn't reach Open Library. Check connection.\n";
