@@ -343,6 +343,7 @@ void Menu::DisplayMainMenu() {
       std::cout << "\n\n=== Search Open Library ===\n";
       std::cout << "1. Search by Title\n";
       std::cout << "2. Search by Author\n";
+      std::cout << "3. Search by ISBN\n";
       std::cout << "Choice: ";
       std::cin >> choice;
 
@@ -379,6 +380,30 @@ void Menu::DisplayMainMenu() {
 
         std::optional<std::vector<Book>> results =
             client.SearchByAuthor(author);
+
+        if (!results.has_value()) {
+          std::cout << "\nCouldn't reach Open Library. Check connection.\n";
+        } else if (results->empty()) {
+          std::cout << "\nNo matching books found.\n";
+        } else {
+          std::cout << "\n== OPEN LIBRARY RESULTS ==" << std::endl;
+          int counter = 1;
+
+          for (const auto &result : *results) {
+            std::cout << counter << ". " << result << "\n";
+            counter++;
+          }
+        }
+        break;
+      }
+      case 3: { // SEARCH BY ISBN
+        std::cin.ignore();
+        std::string isbn;
+        std::cout << "\nEnter ISBN: ";
+        std::getline(std::cin, isbn);
+
+        std::optional<std::vector<Book>> results =
+            client.SearchByIsbn(isbn);
 
         if (!results.has_value()) {
           std::cout << "\nCouldn't reach Open Library. Check connection.\n";
