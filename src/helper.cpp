@@ -1,4 +1,5 @@
 #include "../include/helper.h"
+#include <algorithm>
 #include <cctype>
 
 namespace Helper {
@@ -110,5 +111,28 @@ std::string ToStandardFormat(std::string word) {
   }
 
   return formattedWord;
+};
+
+std::string RemoveChars(std::string word, const std::string &charsToRemove) {
+  word.erase(
+    std::remove_if(word.begin(), word.end(),
+      [&charsToRemove](char c) {
+        return charsToRemove.find(c) != std::string::npos;
+      }),
+    word.end()
+  );
+  return word;
+};
+
+std::string RemoveLeadingArticle(std::string word) {
+  if (word.starts_with("the ")) {
+    word.erase(0, 4);
+  } else if (word.starts_with("an ")) {
+    word.erase(0, 3);
+  } else if (word.starts_with("a ")) {
+    word.erase(0, 2);
+  }
+
+  return word;
 };
 } // namespace Helper
